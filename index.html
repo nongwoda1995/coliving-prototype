@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>克莱因共居社区</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #ffeef8 0%, #e8f4ff 100%); min-height: 100vh; }
+        .container { max-width: 400px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; padding: 40px 0; }
+        .header h1 { font-size: 28px; color: #ff6b9d; margin-bottom: 8px; }
+        .header p { color: #666; font-size: 14px; }
+        .card { background: white; border-radius: 20px; padding: 20px; margin-bottom: 16px; box-shadow: 0 4px 20px rgba(255, 107, 157, 0.1); }
+        .card h3 { color: #333; margin-bottom: 12px; }
+        .card p { color: #666; font-size: 14px; line-height: 1.6; }
+        .btn { width: 100%; padding: 14px; border: none; border-radius: 12px; font-size: 16px; cursor: pointer; margin-top: 12px; }
+        .btn-primary { background: linear-gradient(135deg, #ff6b9d 0%, #6b9dff 100%); color: white; }
+        .tabs { display: flex; justify-content: space-around; padding: 16px; background: white; border-radius: 20px; position: fixed; bottom: 20px; left: 20px; right: 20px; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); }
+        .tab { text-align: center; font-size: 12px; color: #999; }
+        .tab.active { color: #ff6b9d; }
+        .tab-icon { font-size: 24px; margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏠 克莱因共居社区</h1>
+            <p>一起生活，一起创作生活</p>
+        </div>
+        
+        <div class="card">
+            <h3>🎉 周末电影之夜</h3>
+            <p>周六晚上一起看电影、吃零食、聊天放松</p>
+            <p style="margin-top:8px; font-size:12px; color:#999;">📍 克莱因客厅 · 👥 8/12人</p>
+            <button class="btn btn-primary" onclick="alert('报名成功！')">立即报名</button>
+        </div>
+        
+        <div class="card">
+            <h3>🍳 早餐共煮计划</h3>
+            <p>每天早上轮流做早餐，分享美好一天的开始</p>
+            <p style="margin-top:8px; font-size:12px; color:#999;">📍 共享厨房 · 👥 5/6人</p>
+            <button class="btn btn-primary" onclick="alert('报名成功！')">立即报名</button>
+        </div>
+    </div>
+    
+    <div class="tabs">
+        <div class="tab active"><div class="tab-icon">🏠</div>首页</div>
+        <div class="tab"><div class="tab-icon">📋</div>活动</div>
+        <div class="tab"><div class="tab-icon">➕</div>发起</div>
+        <div class="tab"><div class="tab-icon">👤</div>我的</div>
+    </div>
+</body>
+</html>
