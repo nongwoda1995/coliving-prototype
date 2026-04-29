@@ -9,6 +9,8 @@
   --klein: #002FA7;
   --klein-light: #1E4FD0;
   --klein-lighter: #5B7FFF;
+  --mint: #00D4AA;
+  --gold: #FFB347;
   --bg: #F8FAFF;
   --text: #0D1B2A;
   --text-light: #5A6B7D;
@@ -68,6 +70,10 @@ body {
 .card-tag {
   display: inline-flex; background: linear-gradient(135deg, var(--klein) 0%, var(--klein-light) 100%);
   color: white; padding: 5px 14px; border-radius: 20px; font-size: 11px; margin-right: 8px; font-weight: 500;
+}
+.card-points {
+  display: inline-flex; background: linear-gradient(135deg, var(--gold) 0%, #FFD700 100%);
+  color: #5A4000; padding: 5px 14px; border-radius: 20px; font-size: 11px; margin-right: 8px; font-weight: 700;
 }
 .space-card {
   background: white; border-radius: 24px; margin-bottom: 16px;
@@ -155,6 +161,13 @@ textarea.form-input { resize: none; height: 100px; }
 .info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; font-size: 13px; }
 .info-label { color: var(--text-light); }
 .info-value { font-weight: 600; color: var(--text); }
+.points-card {
+  background: linear-gradient(135deg, var(--gold) 0%, #FFD700 100%);
+  color: #5A4000; border: none;
+}
+.points-big { font-size: 52px; font-weight: bold; }
+.points-label { font-size: 14px; opacity: 0.8; }
+.points-ways { font-size: 12px; opacity: 0.7; margin-top: 12px; }
 </style>
 </head>
 <body>
@@ -169,15 +182,17 @@ textarea.form-input { resize: none; height: 100px; }
     </div>
     <div class="content">
       <div class="card" onclick="showScreen('screen-detail')">
-        <div class="card-tag">🔥 热门</div>
+        <span class="card-tag">🔥 热门</span>
+        <span class="card-points">💎 50积分起</span>
         <div class="card-title">📚 周末读书会</div>
-        <div class="card-meta"><span>📅 5月4日 14:00</span><span>📍 朝阳区</span></div>
+        <div class="card-meta"><span>📅 5月4日 14:00</span><span>📍 朝阳区</span><span>🏠 蓝调创意空间</span></div>
         <div class="card-desc">共读《乌合之众》，探讨群体心理学...</div>
       </div>
       <div class="card">
-        <div class="card-tag">线上</div>
+        <span class="card-tag">线上</span>
+        <span class="card-points">💎 30积分起</span>
         <div class="card-title">☕ Coffee Chat</div>
-        <div class="card-meta"><span>📅 5月6日 21:00</span><span>📍 腾讯会议</span></div>
+        <div class="card-meta"><span>📅 5月6日 21:00</span><span>📍 腾讯会议</span><span>🏠 极客互联空间</span></div>
         <div class="card-desc">聊聊创业路上的坑，互相支招 🤝</div>
       </div>
     </div>
@@ -196,19 +211,25 @@ textarea.form-input { resize: none; height: 100px; }
       <div class="header-subtitle">填写申请表单 💫</div>
     </div>
     <div class="content">
+      <div style="background: linear-gradient(135deg, rgba(0,47,167,0.05) 0%, rgba(0,47,167,0.02) 100%); padding: 16px; border-radius: 16px; margin-bottom: 20px; font-size: 13px; color: var(--klein); line-height: 1.7;">
+        💬 <strong>申请流程：</strong>提交表单 → 我们安排<strong>线下聊聊</strong> → 双向选择 → 加入共居
+      </div>
+      
       <div class="form-group">
-        <label class="form-label">🎯 申请身份</label>
+        <label class="form-label">🎯 我是（双向选择）</label>
         <div class="radio-group">
-          <div class="radio-option selected" onclick="selectIdentity(this, 'member')"><div class="radio-icon">🤝</div><div>居民</div></div>
-          <div class="radio-option" onclick="selectIdentity(this, 'host')"><div class="radio-icon">👑</div><div>主理人</div></div>
+          <div class="radio-option selected" onclick="selectIdentity(this, 'member')"><div class="radio-icon">🤝</div><div>想共居</div></div>
+          <div class="radio-option" onclick="selectIdentity(this, 'host')"><div class="radio-icon">👑</div><div>想当主理人</div></div>
         </div>
       </div>
+      
       <div class="form-group">
-        <label class="form-label">👤 姓名</label>
-        <input type="text" class="form-input" placeholder="你的称呼">
+        <label class="form-label">👤 怎么称呼你？</label>
+        <input type="text" class="form-input" placeholder="你的名字或昵称">
       </div>
+      
       <div class="form-group">
-        <label class="form-label">🏠 选择空间</label>
+        <label class="form-label">🏠 想加入哪个空间？</label>
         <select class="form-input">
           <option>🎨 蓝调创意空间</option>
           <option>💻 极客互联空间</option>
@@ -216,13 +237,22 @@ textarea.form-input { resize: none; height: 100px; }
           <option>📋 通用申请（还没找到合适的空间）</option>
         </select>
       </div>
+      
       <div class="form-group">
-        <label class="form-label">📝 生活习惯</label>
-        <textarea class="form-input" placeholder="简单介绍一下你的生活习惯、兴趣爱好..."></textarea>
+        <label class="form-label">📝 简单介绍一下自己</label>
+        <textarea class="form-input" placeholder="生活习惯、职业、兴趣爱好...让我们了解你"></textarea>
       </div>
-      <button class="btn btn-primary" onclick="submitApply()">🚀 提交申请</button>
+      
+      <div class="form-group">
+        <label class="form-label">💬 联系方式（必填）</label>
+        <input type="text" class="form-input" placeholder="微信号，方便我们联系你">
+      </div>
+      
+      <button class="btn btn-primary" onclick="submitApply()">🚀 提交申请（下一步：线下聊聊）</button>
+      
       <div style="height:24px;"></div>
       <div class="section-title">🏠 空间展示</div>
+      
       <div class="space-card" onclick="showSpaceDetail('creative')">
         <div class="space-cover creative"><div class="space-name">🎨 蓝调创意空间</div></div>
         <div class="space-body">
@@ -234,6 +264,7 @@ textarea.form-input { resize: none; height: 100px; }
           </div>
         </div>
       </div>
+      
       <div class="space-card" onclick="showSpaceDetail('tech')">
         <div class="space-cover tech"><div class="space-name">💻 极客互联空间</div></div>
         <div class="space-body">
@@ -288,15 +319,59 @@ textarea.form-input { resize: none; height: 100px; }
   <div class="screen" id="screen-create">
     <div class="header-simple">
       <div class="header-title">➕ 发起活动</div>
-      <div class="header-subtitle">主理人专属 🎯</div>
+      <div class="header-subtitle">主理人专属 · 贡献得积分 🎯</div>
     </div>
     <div class="content">
-      <div class="card-desc" style="margin-bottom:20px; color:var(--klein);">✨ 你是认证主理人，可以发起活动！</div>
-      <div class="form-group"><label class="form-label">📝 活动名称</label><input type="text" class="form-input" placeholder="给活动起个名字"></div>
-      <div class="form-group"><label class="form-label">🏠 所属空间</label>
-        <select class="form-input"><option>💻 极客互联空间（我的空间）</option><option>🎨 蓝调创意空间</option><option>🌿 森系生活空间</option></select>
+      <div style="background: linear-gradient(135deg, rgba(0,212,170,0.1) 0%, rgba(0,212,170,0.05) 100%); padding: 16px; border-radius: 16px; margin-bottom: 20px; font-size: 13px; color: #00A080; line-height: 1.7;">
+        ✨ <strong>发起活动可获得 +20 积分！</strong><br>
+        积分是社区贡献的度量，可用于解锁更多权限
       </div>
-      <button class="btn btn-primary" onclick="showToast('🚀 活动已发布！', '等待小伙伴报名吧 🎉', '➕')">🚀 发布活动</button>
+      
+      <div class="form-group">
+        <label class="form-label">📝 活动名称</label>
+        <input type="text" class="form-input" placeholder="给活动起个名字">
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">🏠 所属空间</label>
+        <select class="form-input">
+          <option>💻 极客互联空间（我的空间）</option>
+          <option>🎨 蓝调创意空间</option>
+          <option>🌿 森系生活空间</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">📅 活动时间</label>
+        <input type="text" class="form-input" placeholder="例如：5月10日 14:00-17:00">
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">📍 活动地点</label>
+        <input type="text" class="form-input" placeholder="具体地址或线上会议链接">
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">📖 活动介绍</label>
+        <textarea class="form-input" placeholder="活动内容、流程、注意事项..."></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">💎 参与门槛（积分）</label>
+        <select class="form-input">
+          <option>无门槛（所有人可参加）</option>
+          <option>需要 30 积分以上</option>
+          <option>需要 50 积分以上</option>
+          <option>需要 100 积分以上</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">👥 人数上限</label>
+        <input type="number" class="form-input" placeholder="例如：20人" value="15">
+      </div>
+      
+      <button class="btn btn-primary" onclick="showToast('🚀 活动已发布！', '你获得 +20 积分贡献值 🎉<br>等待小伙伴报名吧', '➕')">🚀 发布活动（+20积分）</button>
     </div>
     <div class="tab-bar">
       <div class="tab-item" onclick="showScreen('screen-home')"><div class="tab-icon">🏠</div><div class="tab-label">首页</div></div>
@@ -308,7 +383,8 @@ textarea.form-input { resize: none; height: 100px; }
 
   <!-- 活动详情 -->
   <div class="screen" id="screen-detail">
-    <div class="header-simple"><div class="back-btn" onclick="showScreen('screen-home')">← 返回</div>
+    <div class="header-simple">
+      <div class="back-btn" onclick="showScreen('screen-home')">← 返回</div>
       <div class="header-title">📚 周末读书会</div>
       <div class="header-subtitle">共读《乌合之众》</div>
     </div>
@@ -316,12 +392,24 @@ textarea.form-input { resize: none; height: 100px; }
       <div class="card">
         <div class="card-meta"><span>📅 5月4日 14:00-17:00</span></div>
         <div class="card-meta"><span>📍 朝阳区望京</span></div>
-        <div class="card-meta"><span>💎 积分 10分</span></div>
         <div class="card-meta"><span>🏠 蓝调创意空间</span></div>
+        <div class="card-meta"><span>💎 需 50 积分以上</span></div>
+        <div class="card-meta"><span>👥 限 15 人</span></div>
       </div>
       <div class="section-title">📖 活动介绍</div>
-      <div class="card"><div class="card-desc">共读《乌合之众》，探讨群体心理学，理解我们如何在群体中保持独立思考...</div></div>
-      <button class="btn btn-primary" onclick="showToast('🎉 报名成功！', '已扣除 10 积分<br>活动前会微信提醒你', '✅')">🎉 立即报名（-10积分）</button>
+      <div class="card"><div class="card-desc">
+        这是一本关于群体心理学的经典著作。我们将一起阅读、讨论，探讨：<br><br>
+        • 个人在群体中为什么会失去独立判断？<br>
+        • 如何在群体中保持清醒？<br>
+        • 群体智慧 vs 群体盲从<br><br>
+        不需要提前读完，现场一起读也OK！😊
+      </div></div>
+      <div class="section-title">💎 积分说明</div>
+      <div class="card"><div class="card-desc">
+        本活动需要 <strong>50积分以上</strong> 才能报名。<br>
+        积分代表你对社区的贡献度，可通过拉新、宣传、发起活动等方式获得。
+      </div></div>
+      <button class="btn btn-primary" onclick="showToast('🎉 报名成功！', '活动前会微信提醒你<br>记得准时参加哦 📅', '✅')">🎉 立即报名</button>
     </div>
     <div class="tab-bar">
       <div class="tab-item" onclick="showScreen('screen-home')"><div class="tab-icon">🏠</div><div class="tab-label">首页</div></div>
@@ -340,10 +428,20 @@ textarea.form-input { resize: none; height: 100px; }
       </div>
     </div>
     <div class="content">
-      <div class="card" style="background:linear-gradient(135deg,#FFB347,#FFCC70);color:#5A4000;border:none;">
-        <div style="font-size:52px;font-weight:bold;">128</div>
-        <div style="font-size:14px;opacity:0.8;">💎 我的积分</div>
+      <div class="card points-card">
+        <div class="points-big">128</div>
+        <div class="points-label">💎 我的积分（贡献值）</div>
+        <div class="points-ways">拉新+30 | 宣传+10 | 发起活动+20</div>
       </div>
+      
+      <div class="section-title">📊 积分明细</div>
+      <div class="card">
+        <div class="info-row"><span class="info-label">🎉 拉新（邀请3位好友）</span><span class="info-value" style="color:#2ECC71">+90</span></div>
+        <div class="info-row"><span class="info-label">📢 宣传活动（分享4次）</span><span class="info-value" style="color:#2ECC71">+40</span></div>
+        <div class="info-row"><span class="info-label">➕ 发起活动（1次）</span><span class="info-value" style="color:#2ECC71">+20</span></div>
+        <div class="info-row" style="border-bottom:none;"><span class="info-label">📝 新用户初始积分</span><span class="info-value" style="color:#2ECC71">-22</span></div>
+      </div>
+      
       <div class="section-title">🏠 我的空间</div>
       <div class="card">
         <div class="card-title">💻 极客互联空间</div>
