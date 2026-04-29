@@ -4,39 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>克莱因共居社区</title>
-  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --klein: #002FA7;
       --klein-light: #1E4FD0;
       --klein-lighter: #5B7FFF;
-      --klein-glow: #8AA8FF;
       --mint: #00D4AA;
-      --mint-light: #7AFFDC;
-      --accent: #FF6B6B;
-      --accent-warm: #FFB347;
       --bg: #F8FAFF;
-      --card: #FFFFFF;
-      --text: #0D1B2A;
-      --text-light: #5A6B7D;
-      --shadow-soft: 0 4px 20px rgba(0, 47, 167, 0.08);
-      --shadow-card: 0 8px 32px rgba(0, 47, 167, 0.12);
-      --shadow-hover: 0 16px 48px rgba(0, 47, 167, 0.18);
     }
     
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     
     body {
-      font-family: 'Noto Sans SC', -apple-system, sans-serif;
+      font-family: -apple-system, 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #E8EEFF 0%, #F0F4FF 50%, #F8FAFF 100%);
       min-height: 100vh;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
       padding: 20px;
     }
     
@@ -45,202 +29,81 @@
       height: 812px;
       background: var(--bg);
       border-radius: 50px;
-      box-shadow: 
-        0 30px 80px rgba(0, 47, 167, 0.25),
-        inset 0 0 0 12px #1A1A2E,
-        inset 0 0 0 14px #2A2A4A;
+      box-shadow: 0 30px 80px rgba(0, 47, 167, 0.25);
       overflow: hidden;
       position: relative;
-    }
-    
-    .phone-frame::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 150px;
-      height: 30px;
-      background: #1A1A2E;
-      border-radius: 0 0 20px 20px;
-      z-index: 100;
     }
     
     .screen {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       display: none;
       flex-direction: column;
-      background: var(--bg);
     }
     
-    .screen.active {
-      display: flex;
-    }
+    .screen.active { display: flex; }
     
-    /* Header - Premium Gradient */
     .header {
       padding: 50px 20px 24px;
-      background: linear-gradient(135deg, var(--klein) 0%, var(--klein-light) 50%, var(--klein-lighter) 100%);
+      background: linear-gradient(135deg, var(--klein) 0%, var(--klein-light) 100%);
       color: white;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .header::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      right: -30%;
-      width: 200px;
-      height: 200px;
-      background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-    
-    .header::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 30px;
-      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.05));
     }
     
     .header-title {
-      font-family: 'ZCOOL KuaiLe', cursive;
       font-size: 26px;
+      font-weight: bold;
       margin-bottom: 6px;
-      letter-spacing: 1px;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
     
-    .header-subtitle {
-      font-size: 13px;
-      opacity: 0.9;
-      font-weight: 300;
-    }
+    .header-subtitle { font-size: 13px; opacity: 0.9; }
     
     .header-simple {
       padding: 50px 20px 20px;
-      background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFF 100%);
-      border-bottom: 1px solid rgba(0, 47, 167, 0.08);
+      background: white;
+      border-bottom: 1px solid #eee;
     }
     
-    /* Content Area */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: #666;
+      cursor: pointer;
+      padding: 8px 0;
+    }
+    
+    .back-btn:hover { color: var(--klein); }
+    
     .content {
       flex: 1;
       overflow-y: auto;
       padding: 20px 16px;
-      background: linear-gradient(180deg, var(--bg) 0%, #FFFFFF 100%);
     }
     
-    .content::-webkit-scrollbar {
-      width: 0;
-    }
-    
-    /* Stats Bar */
-    .stats-bar {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-    
-    .stat-item {
-      flex: 1;
-      background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFF 100%);
-      border-radius: 20px;
-      padding: 16px 12px;
-      text-align: center;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(0, 47, 167, 0.06);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .stat-item::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--klein), var(--klein-lighter));
-      opacity: 0.8;
-    }
-    
-    .stat-value {
-      font-family: 'ZCOOL KuaiLe', cursive;
-      font-size: 32px;
-      background: linear-gradient(135deg, var(--klein) 0%, var(--klein-lighter) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    .stat-label {
-      font-size: 11px;
-      color: var(--text-light);
-      margin-top: 4px;
-      font-weight: 500;
-    }
-    
-    /* Section Title */
     .section-title {
-      font-family: 'ZCOOL KuaiLe', cursive;
       font-size: 18px;
+      font-weight: bold;
       margin-bottom: 16px;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      color: #0D1B2A;
     }
     
-    /* Cards - Premium Style */
     .card {
-      background: linear-gradient(135deg, #FFFFFF 0%, #FAFBFF 100%);
+      background: white;
       border-radius: 20px;
       padding: 20px;
       margin-bottom: 16px;
-      box-shadow: var(--shadow-card);
+      box-shadow: 0 8px 32px rgba(0, 47, 167, 0.12);
       cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s;
       border: 1px solid rgba(0, 47, 167, 0.06);
-      position: relative;
-      overflow: hidden;
     }
     
-    .card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, transparent 0%, rgba(0, 47, 167, 0.02) 100%);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-hover);
-      border-color: rgba(0, 47, 167, 0.12);
-    }
-    
-    .card:hover::before {
-      opacity: 1;
-    }
-    
-    .card:active {
-      transform: scale(0.98);
-    }
+    .card:hover { transform: translateY(-6px); }
     
     .card-title {
-      font-family: 'ZCOOL KuaiLe', cursive;
       font-size: 18px;
-      color: var(--text);
+      font-weight: bold;
+      color: #0D1B2A;
       margin-bottom: 12px;
     }
     
@@ -248,20 +111,19 @@
       display: flex;
       gap: 14px;
       font-size: 12px;
-      color: var(--text-light);
+      color: #5A6B7D;
       margin-bottom: 12px;
       flex-wrap: wrap;
     }
     
     .card-desc {
       font-size: 13px;
-      color: var(--text-light);
+      color: #5A6B7D;
       line-height: 1.7;
     }
     
     .card-tag {
       display: inline-flex;
-      align-items: center;
       background: linear-gradient(135deg, var(--klein) 0%, var(--klein-light) 100%);
       color: white;
       padding: 5px 14px;
@@ -269,38 +131,22 @@
       font-size: 11px;
       margin-right: 8px;
       font-weight: 500;
-      box-shadow: 0 2px 8px rgba(0, 47, 167, 0.25);
     }
     
-    .card-tag.hot {
-      background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
-      box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
-    }
-    
-    .card-tag.mint {
-      background: linear-gradient(135deg, var(--mint) 0%, var(--mint-light) 100%);
-      box-shadow: 0 2px 8px rgba(0, 212, 170, 0.3);
-    }
-    
-    /* Space Card - Premium Style */
     .space-card {
-      background: linear-gradient(135deg, #FFFFFF 0%, #FAFBFF 100%);
+      background: white;
       border-radius: 24px;
       margin-bottom: 16px;
-      box-shadow: var(--shadow-card);
+      box-shadow: 0 8px 32px rgba(0, 47, 167, 0.12);
       cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      border: 1px solid rgba(0, 47, 167, 0.06);
+      transition: all 0.3s;
       overflow: hidden;
     }
     
-    .space-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-hover);
-    }
+    .space-card:hover { transform: translateY(-6px); }
     
-    .space-header {
-      height: 100px;
+    .space-cover {
+      height: 160px;
       position: relative;
       display: flex;
       align-items: flex-end;
@@ -308,65 +154,56 @@
       color: white;
     }
     
-    .space-header.creative {
-      background: linear-gradient(135deg, #FF6B9D 0%, #FFB8D0 50%, #FFD6E0 100%);
-    }
+    .space-cover.creative { background: linear-gradient(135deg, #FF6B9D 0%, #FFB8D0 100%); }
+    .space-cover.tech { background: linear-gradient(135deg, var(--klein) 0%, var(--klein-lighter) 100%); }
+    .space-cover.nature { background: linear-gradient(135deg, #2ECC71 0%, #58D68D 100%); }
     
-    .space-header.tech {
-      background: linear-gradient(135deg, var(--klein) 0%, var(--klein-light) 50%, var(--klein-lighter) 100%);
-    }
-    
-    .space-header.nature {
-      background: linear-gradient(135deg, #2ECC71 0%, #58D68D 50%, #ABEBC6 100%);
-    }
-    
-    .space-header::before {
+    .space-cover::before {
       content: "";
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.2) 100%);
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.3) 100%);
     }
     
     .space-name {
-      font-family: 'ZCOOL KuaiLe', cursive;
       font-size: 22px;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+      font-weight: bold;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.3);
       position: relative;
       z-index: 1;
     }
     
-    .space-body {
-      padding: 18px;
-    }
+    .space-body { padding: 18px; }
     
     .space-theme {
       display: inline-flex;
-      align-items: center;
-      background: linear-gradient(135deg, rgba(0, 47, 167, 0.08) 0%, rgba(0, 47, 167, 0.04) 100%);
+      background: rgba(0, 47, 167, 0.08);
       color: var(--klein);
       padding: 6px 14px;
       border-radius: 20px;
       font-size: 11px;
       font-weight: 700;
       margin-bottom: 12px;
-      letter-spacing: 0.5px;
+    }
+    
+    .space-info {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 14px;
+      font-size: 12px;
+      color: #5A6B7D;
     }
     
     .space-host {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-top: 14px;
       padding-top: 14px;
       border-top: 1px solid rgba(0, 47, 167, 0.06);
     }
     
     .host-avatar {
-      width: 40px;
-      height: 40px;
+      width: 40px; height: 40px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--klein) 0%, var(--klein-lighter) 100%);
       display: flex;
@@ -375,146 +212,91 @@
       color: white;
       font-size: 16px;
       font-weight: 700;
-      box-shadow: 0 4px 12px rgba(0, 47, 167, 0.25);
-    }
-    
-    .host-info {
-      flex: 1;
     }
     
     .host-name {
       font-size: 14px;
       font-weight: 600;
-      color: var(--text);
+      color: #0D1B2A;
     }
     
     .host-desc {
       font-size: 11px;
-      color: var(--text-light);
+      color: #5A6B7D;
       margin-top: 2px;
     }
     
-    /* Application Channel Cards */
-    .channel-grid {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-    
-    .channel-card {
-      flex: 1;
-      background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFF 100%);
-      border-radius: 20px;
-      padding: 20px 16px;
-      text-align: center;
-      box-shadow: var(--shadow-card);
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      border: 2px solid transparent;
+    /* Space Detail */
+    .space-detail-cover {
+      height: 220px;
       position: relative;
-      overflow: hidden;
+      color: white;
     }
     
-    .channel-card::before {
+    .space-detail-cover.creative { background: linear-gradient(135deg, #FF6B9D 0%, #FFB8D0 100%); }
+    .space-detail-cover.tech { background: linear-gradient(135deg, var(--klein) 0%, var(--klein-lighter) 100%); }
+    .space-detail-cover.nature { background: linear-gradient(135deg, #2ECC71 0%, #58D68D 100%); }
+    
+    .space-detail-cover::before {
       content: "";
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--klein), var(--klein-lighter));
-      opacity: 0;
-      transition: opacity 0.3s;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.4) 100%);
     }
     
-    .channel-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-hover);
+    .cover-content {
+      position: absolute;
+      bottom: 20px; left: 20px; right: 20px;
+      z-index: 1;
     }
     
-    .channel-card.active {
-      border-color: var(--klein);
+    .cover-title {
+      font-size: 28px;
+      font-weight: bold;
+      text-shadow: 0 3px 15px rgba(0,0,0,0.3);
+      margin-bottom: 8px;
     }
     
-    .channel-card.active::before {
-      opacity: 1;
+    .cover-meta {
+      display: flex;
+      gap: 12px;
+      font-size: 12px;
+      opacity: 0.9;
     }
     
-    .channel-icon {
-      font-size: 36px;
-      margin-bottom: 10px;
+    .photo-gallery {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 16px 0;
+      margin: 0 -16px;
+      padding-left: 16px;
     }
     
-    .channel-title {
-      font-family: 'ZCOOL KuaiLe', cursive;
-      font-size: 15px;
-      color: var(--text);
-      margin-bottom: 4px;
+    .photo-item {
+      min-width: 120px;
+      height: 90px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      flex-shrink: 0;
     }
     
-    .channel-desc {
-      font-size: 11px;
-      color: var(--text-light);
-    }
+    .photo-item.creative { background: linear-gradient(135deg, #FF6B9D 0%, #FFB8D0 100%); }
+    .photo-item.tech { background: linear-gradient(135deg, var(--klein) 0%, var(--klein-lighter) 100%); }
+    .photo-item.nature { background: linear-gradient(135deg, #2ECC71 0%, #58D68D 100%); }
     
-    /* Buttons - Premium Style */
-    .btn {
-      width: 100%;
-      padding: 18px;
-      border: none;
-      border-radius: 28px;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      font-family: 'ZCOOL KuaiLe', cursive;
-      position: relative;
-      overflow: hidden;
-      letter-spacing: 1px;
-    }
-    
-    .btn-primary {
-      background: linear-gradient(135deg, var(--klein) 0%, var(--klein-light) 50%, var(--klein-lighter) 100%);
-      color: white;
-      box-shadow: 
-        0 8px 24px rgba(0, 47, 167, 0.35),
-        inset 0 1px 0 rgba(255,255,255,0.2);
-    }
-    
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 
-        0 12px 32px rgba(0, 47, 167, 0.45),
-        inset 0 1px 0 rgba(255,255,255,0.2);
-    }
-    
-    .btn-primary:active {
-      transform: translateY(0);
-    }
-    
-    .btn-secondary {
-      background: linear-gradient(135deg, var(--mint) 0%, var(--mint-light) 100%);
-      color: white;
-      box-shadow: 0 8px 24px rgba(0, 212, 170, 0.35);
-    }
-    
-    .btn-accent {
-      background: linear-gradient(135deg, #FF6B6B 0%, #FFB347 100%);
-      color: white;
-      box-shadow: 0 8px 24px rgba(255, 107, 107, 0.35);
-    }
-    
-    /* Forms */
-    .form-group {
-      margin-bottom: 20px;
-    }
+    /* Form */
+    .form-group { margin-bottom: 20px; }
     
     .form-label {
       display: block;
       font-size: 13px;
       font-weight: 600;
       margin-bottom: 10px;
-      color: var(--text);
+      color: #0D1B2A;
     }
     
     .form-input {
@@ -524,43 +306,68 @@
       border-radius: 16px;
       font-size: 14px;
       font-family: inherit;
-      background: linear-gradient(135deg, #FFFFFF 0%, #FAFBFF 100%);
+      background: white;
+      color: #0D1B2A;
+    }
+    
+    textarea.form-input { resize: none; height: 100px; }
+    
+    .radio-group {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .radio-option {
+      flex: 1;
+      padding: 14px;
+      border: 2px solid rgba(0, 47, 167, 0.1);
+      border-radius: 16px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      color: #5A6B7D;
       transition: all 0.3s;
-      color: var(--text);
     }
     
-    .form-input:focus {
-      outline: none;
+    .radio-option.selected {
       border-color: var(--klein);
-      box-shadow: 0 0 0 4px rgba(0, 47, 167, 0.08);
+      background: rgba(0, 47, 167, 0.05);
+      color: var(--klein);
     }
     
-    .form-input::placeholder {
-      color: #A0A8B8;
+    .radio-icon { font-size: 24px; margin-bottom: 6px; }
+    
+    /* Buttons */
+    .btn {
+      width: 100%;
+      padding: 18px;
+      border: none;
+      border-radius: 28px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      letter-spacing: 1px;
     }
     
-    textarea.form-input {
-      resize: none;
-      height: 100px;
+    .btn-primary {
+      background: linear-gradient(135deg, var(--klein) 0%, var(--klein-light) 100%);
+      color: white;
+      box-shadow: 0 8px 24px rgba(0, 47, 167, 0.35);
     }
     
-    /* Tab Bar - Premium Style */
+    .btn-primary:hover { transform: translateY(-3px); }
+    
+    .btn-full { margin-top: 20px; }
+    
+    /* Tab Bar */
     .tab-bar {
       display: flex;
-      background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFF 100%);
+      background: white;
       padding: 12px 8px 28px;
-      border-top: 1px solid rgba(0, 47, 167, 0.06);
-      position: relative;
-    }
-    
-    .tab-bar::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(0, 47, 167, 0.1), transparent);
+      border-top: 1px solid #eee;
     }
     
     .tab-item {
@@ -571,207 +378,31 @@
       gap: 6px;
       padding: 10px;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      color: #5A6B7D;
       position: relative;
-      color: var(--text-light);
     }
     
-    .tab-item.active {
-      color: var(--klein);
-    }
+    .tab-item.active { color: var(--klein); }
     
     .tab-item.active::before {
       content: "";
       position: absolute;
-      top: -12px;
-      left: 50%;
+      top: -12px; left: 50%;
       transform: translateX(-50%);
-      width: 32px;
-      height: 4px;
+      width: 32px; height: 4px;
       background: linear-gradient(90deg, var(--klein), var(--klein-lighter));
       border-radius: 2px;
-      box-shadow: 0 2px 8px rgba(0, 47, 167, 0.3);
     }
     
-    .tab-icon {
-      font-size: 26px;
-      transition: transform 0.3s;
-    }
-    
-    .tab-item:hover .tab-icon {
-      transform: scale(1.15) rotate(5deg);
-    }
-    
-    .tab-item.active .tab-icon {
-      transform: scale(1.1);
-    }
-    
-    .tab-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-    }
-    
-    /* Badge */
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.3px;
-    }
-    
-    .badge-host {
-      background: linear-gradient(135deg, var(--klein) 0%, var(--klein-light) 100%);
-      color: white;
-      box-shadow: 0 2px 8px rgba(0, 47, 167, 0.25);
-    }
-    
-    .badge-member {
-      background: linear-gradient(135deg, var(--mint) 0%, var(--mint-light) 100%);
-      color: white;
-      box-shadow: 0 2px 8px rgba(0, 212, 170, 0.25);
-    }
-    
-    /* List Item */
-    .list-item {
-      display: flex;
-      align-items: center;
-      padding: 16px;
-      background: linear-gradient(135deg, #FFFFFF 0%, #FAFBFF 100%);
-      border-radius: 20px;
-      margin-bottom: 12px;
-      box-shadow: var(--shadow-soft);
-      cursor: pointer;
-      transition: all 0.3s;
-      border: 1px solid rgba(0, 47, 167, 0.04);
-    }
-    
-    .list-item:hover {
-      transform: translateX(6px);
-      border-color: rgba(0, 47, 167, 0.1);
-    }
-    
-    .list-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, var(--klein) 0%, var(--klein-lighter) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      margin-right: 14px;
-      box-shadow: 0 4px 12px rgba(0, 47, 167, 0.2);
-    }
-    
-    .list-content {
-      flex: 1;
-    }
-    
-    .list-title {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text);
-    }
-    
-    .list-desc {
-      font-size: 12px;
-      color: var(--text-light);
-      margin-top: 3px;
-    }
-    
-    /* Back Button */
-    .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 14px;
-      color: var(--text-light);
-      cursor: pointer;
-      padding: 8px 0;
-      transition: all 0.3s;
-      font-weight: 500;
-    }
-    
-    .back-btn:hover {
-      color: var(--klein);
-      transform: translateX(-6px);
-    }
-    
-    /* Success Message */
-    .success-msg {
-      background: linear-gradient(135deg, rgba(0, 212, 170, 0.1) 0%, rgba(0, 212, 170, 0.05) 100%);
-      color: var(--mint);
-      padding: 16px;
-      border-radius: 16px;
-      text-align: center;
-      font-size: 14px;
-      margin-bottom: 20px;
-      font-weight: 600;
-      border: 1px solid rgba(0, 212, 170, 0.2);
-    }
-    
-    /* Points Card */
-    .points-card {
-      background: linear-gradient(135deg, #FFB347 0%, #FFCC70 50%, #FFE066 100%);
-      border-radius: 28px;
-      padding: 28px;
-      color: #5A4000;
-      margin-bottom: 24px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 
-        0 12px 32px rgba(255, 179, 71, 0.35),
-        inset 0 1px 0 rgba(255,255,255,0.4);
-    }
-    
-    .points-card::before {
-      content: "💎";
-      position: absolute;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 56px;
-      opacity: 0.25;
-    }
-    
-    .points-value {
-      font-family: 'ZCOOL KuaiLe', cursive;
-      font-size: 52px;
-      text-shadow: 0 2px 8px rgba(255,255,255,0.3);
-    }
-    
-    .points-label {
-      font-size: 14px;
-      opacity: 0.8;
-      font-weight: 500;
-    }
-    
-    /* Avatar */
-    .avatar {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--klein) 0%, var(--klein-lighter) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 26px;
-      font-weight: 700;
-      box-shadow: 0 6px 20px rgba(0, 47, 167, 0.3);
-    }
+    .tab-icon { font-size: 26px; }
+    .tab-label { font-size: 11px; font-weight: 600; }
     
     /* Toast */
     .toast {
       position: fixed;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%) scale(0.85);
-      background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFF 100%);
+      background: white;
       padding: 36px 44px;
       border-radius: 28px;
       box-shadow: 0 24px 80px rgba(0, 0, 0, 0.15);
@@ -779,8 +410,7 @@
       z-index: 1000;
       opacity: 0;
       pointer-events: none;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      border: 1px solid rgba(0, 47, 167, 0.08);
+      transition: all 0.4s;
     }
     
     .toast.show {
@@ -789,23 +419,9 @@
       pointer-events: auto;
     }
     
-    .toast-icon {
-      font-size: 56px;
-      margin-bottom: 16px;
-    }
-    
-    .toast-title {
-      font-family: 'ZCOOL KuaiLe', cursive;
-      font-size: 22px;
-      color: var(--text);
-      margin-bottom: 12px;
-    }
-    
-    .toast-desc {
-      font-size: 14px;
-      color: var(--text-light);
-      line-height: 1.7;
-    }
+    .toast-icon { font-size: 56px; margin-bottom: 16px; }
+    .toast-title { font-size: 22px; font-weight: bold; margin-bottom: 12px; }
+    .toast-desc { font-size: 14px; color: #5A6B7D; line-height: 1.7; }
     
     .toast-close {
       margin-top: 24px;
@@ -817,87 +433,48 @@
       font-size: 15px;
       font-weight: 700;
       cursor: pointer;
-      font-family: 'ZCOOL KuaiLe', cursive;
-      box-shadow: 0 6px 20px rgba(0, 47, 167, 0.3);
-      transition: all 0.3s;
     }
     
-    .toast-close:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 47, 167, 0.4);
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 13px;
     }
     
-    /* Divider */
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(0, 47, 167, 0.1), transparent);
-      margin: 24px 0;
-    }
-    
-    /* Selection highlight */
-    .selected-highlight {
-      border-color: var(--klein) !important;
-      box-shadow: 0 0 0 3px rgba(0, 47, 167, 0.1), var(--shadow-card) !important;
-    }
+    .info-label { color: #5A6B7D; }
+    .info-value { font-weight: 600; color: #0D1B2A; }
   </style>
 </head>
 <body>
   <div class="phone-frame">
     
-    <!-- 首页 - 活动 -->
+    <!-- 首页 -->
     <div class="screen active" id="screen-home">
       <div class="header">
         <div class="header-title">🏠 克莱因共居社区</div>
         <div class="header-subtitle">一起生活，一起创作生活 ✨</div>
       </div>
       <div class="content">
-        <div class="stats-bar">
-          <div class="stat-item">
-            <div class="stat-value">128</div>
-            <div class="stat-label">💎 积分</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value">3</div>
-            <div class="stat-label">📋 已报名</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value">12</div>
-            <div class="stat-label">📅 共居天</div>
-          </div>
-        </div>
-        
-        <div class="section-title">🔥 近期活动</div>
-        
         <div class="card" onclick="showScreen('screen-detail')">
-          <div class="card-tag hot">🔥 热门</div>
-          <div class="card-tag">线下</div>
+          <div class="card-tag">🔥 热门</div>
           <div class="card-title">📚 周末读书会</div>
           <div class="card-meta">
             <span>📅 5月4日 14:00</span>
             <span>📍 朝阳区</span>
           </div>
-          <div class="card-desc">共读《乌合之众》，探讨群体心理学，理解我们如何在群体中保持独立思考...</div>
+          <div class="card-desc">共读《乌合之众》，探讨群体心理学...</div>
         </div>
         
         <div class="card">
           <div class="card-tag">线上</div>
-          <div class="card-tag mint">夜话</div>
           <div class="card-title">☕ Coffee Chat</div>
           <div class="card-meta">
             <span>📅 5月6日 21:00</span>
             <span>📍 腾讯会议</span>
           </div>
-          <div class="card-desc">聊聊创业路上的坑，互相支招，抱团取暖 🤝</div>
-        </div>
-        
-        <div class="card">
-          <div class="card-tag mint">工作坊</div>
-          <div class="card-title">🌿 极简生活工作坊</div>
-          <div class="card-meta">
-            <span>📅 5月10日 10:00</span>
-            <span>📍 海淀区</span>
-          </div>
-          <div class="card-desc">断舍离实操课，一起整理物品，整理人生 ✨</div>
+          <div class="card-desc">聊聊创业路上的坑，互相支招 🤝</div>
         </div>
       </div>
       <div class="tab-bar">
@@ -920,43 +497,65 @@
       </div>
     </div>
     
-    <!-- 申请页 - 申请通道 + 空间展示 -->
+    <!-- 申请页 -->
     <div class="screen" id="screen-apply">
       <div class="header-simple">
         <div class="header-title">📝 加入共居</div>
-        <div class="header-subtitle">选择适合你的方式 💫</div>
+        <div class="header-subtitle">填写申请表单 💫</div>
       </div>
       <div class="content">
-        <div class="section-title">🎯 申请通道</div>
-        
-        <div class="channel-grid">
-          <div class="channel-card" onclick="selectChannel('host')">
-            <div class="channel-icon">👑</div>
-            <div class="channel-title">申请当主理人</div>
-            <div class="channel-desc">创建你的共居空间</div>
-          </div>
-          <div class="channel-card" onclick="selectChannel('member')">
-            <div class="channel-icon">🤝</div>
-            <div class="channel-title">申请当居民</div>
-            <div class="channel-desc">加入喜欢的空间</div>
+        <div class="form-group">
+          <label class="form-label">🎯 申请身份</label>
+          <div class="radio-group">
+            <div class="radio-option selected" onclick="selectIdentity(this, 'member')">
+              <div class="radio-icon">🤝</div>
+              <div>居民</div>
+            </div>
+            <div class="radio-option" onclick="selectIdentity(this, 'host')">
+              <div class="radio-icon">👑</div>
+              <div>主理人</div>
+            </div>
           </div>
         </div>
         
-        <div class="divider"></div>
+        <div class="form-group">
+          <label class="form-label">👤 姓名</label>
+          <input type="text" class="form-input" placeholder="你的称呼">
+        </div>
         
+        <div class="form-group">
+          <label class="form-label">🏠 选择空间</label>
+          <select class="form-input">
+            <option>🎨 蓝调创意空间</option>
+            <option>💻 极客互联空间</option>
+            <option>🌿 森系生活空间</option>
+            <option>📋 通用申请（还没找到合适的空间）</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">📝 生活习惯</label>
+          <textarea class="form-input" placeholder="简单介绍一下你的生活习惯、兴趣爱好..."></textarea>
+        </div>
+        
+        <button class="btn btn-primary" onclick="submitApply()">🚀 提交申请</button>
+        
+        <div style="height: 24px;"></div>
         <div class="section-title">🏠 空间展示</div>
-        <div class="card-desc" style="margin-bottom: 16px; font-size: 12px;">点击空间卡片，了解详情并申请加入</div>
         
-        <div class="space-card" onclick="showToast('🎨 蓝调创意空间', '即将开放空间详情页，可查看房间、成员、活动等完整信息', '🏠')">
-          <div class="space-header creative">
+        <div class="space-card" onclick="showSpaceDetail('creative')">
+          <div class="space-cover creative">
             <div class="space-name">🎨 蓝调创意空间</div>
           </div>
           <div class="space-body">
             <span class="space-theme">🎨 艺术创作</span>
-            <div class="card-desc">朝阳区 · 8个房间 · 专注艺术创作的共居空间</div>
+            <div class="space-info">
+              <span>📍 朝阳区</span>
+              <span>🏠 8个房间</span>
+            </div>
             <div class="space-host">
               <div class="host-avatar">小</div>
-              <div class="host-info">
+              <div>
                 <div class="host-name">小鱼 · 主理人</div>
                 <div class="host-desc">艺术家 · 好评率 98%</div>
               </div>
@@ -964,45 +563,87 @@
           </div>
         </div>
         
-        <div class="space-card" onclick="showToast('💻 极客互联空间', '即将开放空间详情页，可查看房间、成员、活动等完整信息', '🏠')">
-          <div class="space-header tech">
+        <div class="space-card" onclick="showSpaceDetail('tech')">
+          <div class="space-cover tech">
             <div class="space-name">💻 极客互联空间</div>
           </div>
           <div class="space-body">
             <span class="space-theme">💻 科技创新</span>
-            <div class="card-desc">海淀区 · 12个房间 · 程序员和创业者的乐园</div>
+            <div class="space-info">
+              <span>📍 海淀区</span>
+              <span>🏠 12个房间</span>
+            </div>
             <div class="space-host">
               <div class="host-avatar">达</div>
-              <div class="host-info">
+              <div>
                 <div class="host-name">达哥 · 主理人</div>
                 <div class="host-desc">全栈开发者 · 好评率 95%</div>
               </div>
             </div>
           </div>
         </div>
-        
-        <div class="space-card" onclick="showToast('🌿 森系生活空间', '即将开放空间详情页，可查看房间、成员、活动等完整信息', '🏠')">
-          <div class="space-header nature">
-            <div class="space-name">🌿 森系生活空间</div>
-          </div>
-          <div class="space-body">
-            <span class="space-theme">🌿 自然生活</span>
-            <div class="card-desc">顺义区 · 6个房间 · 亲近自然的慢生活社区</div>
-            <div class="space-host">
-              <div class="host-avatar">林</div>
-              <div class="host-info">
-                <div class="host-name">林子 · 主理人</div>
-                <div class="host-desc">生态设计师 · 好评率 99%</div>
-              </div>
+      </div>
+      <div class="tab-bar">
+        <div class="tab-item" onclick="showScreen('screen-home')">
+          <div class="tab-icon">🏠</div>
+          <div class="tab-label">首页</div>
+        </div>
+        <div class="tab-item active" onclick="showScreen('screen-apply')">
+          <div class="tab-icon">📝</div>
+          <div class="tab-label">申请</div>
+        </div>
+        <div class="tab-item" onclick="showScreen('screen-create')">
+          <div class="tab-icon">➕</div>
+          <div class="tab-label">发起</div>
+        </div>
+        <div class="tab-item" onclick="showScreen('screen-profile')">
+          <div class="tab-icon">👤</div>
+          <div class="tab-label">我的</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 空间详情页 -->
+    <div class="screen" id="screen-space-detail">
+      <div class="header-simple">
+        <div class="back-btn" onclick="showScreen('screen-apply')">← 返回</div>
+      </div>
+      <div class="content" style="padding-top: 0;">
+        <div class="space-detail-cover" id="space-detail-cover">
+          <div class="cover-content">
+            <div class="cover-title" id="space-detail-title">空间名称</div>
+            <div class="cover-meta">
+              <span id="space-detail-location">📍 位置</span>
+              <span id="space-detail-rooms">🏠 房间</span>
             </div>
           </div>
         </div>
         
-        <div class="card" style="background: linear-gradient(135deg, rgba(0, 47, 167, 0.04) 0%, rgba(0, 47, 167, 0.02) 100%); text-align: center;">
-          <div class="card-desc" style="color: var(--klein);">💬 没找到满意的空间？<br>填写通用申请，我们帮你匹配 👇</div>
+        <div class="section-title" style="margin-top: 20px;">📷 空间照片</div>
+        <div class="photo-gallery" id="space-photos"></div>
+        
+        <div class="section-title">📖 空间介绍</div>
+        <div class="card">
+          <div class="card-desc" id="space-detail-desc">空间介绍...</div>
         </div>
         
-        <button class="btn btn-primary" onclick="showToast('📝 通用申请', '已跳转到申请表单页面\n我们会根据你的需求帮你匹配合适的空间', '✅')">填写通用申请</button>
+        <div class="section-title">📊 空间信息</div>
+        <div class="card">
+          <div class="info-row">
+            <span class="info-label">主题</span>
+            <span class="info-value" id="space-detail-theme">艺术创作</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">位置</span>
+            <span class="info-value" id="space-detail-loc">朝阳区</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">房间数</span>
+            <span class="info-value" id="space-detail-room-num">8</span>
+          </div>
+        </div>
+        
+        <button class="btn btn-primary btn-full" onclick="showToast('📝 申请已提交', '已向该空间提交加入申请\\n主理人会尽快联系你 💬', '✅')">🤝 申请加入该空间</button>
       </div>
       <div class="tab-bar">
         <div class="tab-item" onclick="showScreen('screen-home')">
@@ -1031,23 +672,11 @@
         <div class="header-subtitle">主理人专属 🎯</div>
       </div>
       <div class="content">
-        <div class="success-msg">
-          ✨ 你是认证主理人，可以发起活动！
-        </div>
+        <div class="card-desc" style="margin-bottom: 20px; color: var(--klein);">✨ 你是认证主理人，可以发起活动！</div>
         
         <div class="form-group">
           <label class="form-label">📝 活动名称</label>
           <input type="text" class="form-input" placeholder="给活动起个名字">
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">🎯 活动类型</label>
-          <select class="form-input">
-            <option>线下聚会</option>
-            <option>线上活动</option>
-            <option>工作坊</option>
-            <option>户外活动</option>
-          </select>
         </div>
         
         <div class="form-group">
@@ -1059,32 +688,7 @@
           </select>
         </div>
         
-        <div class="form-group">
-          <label class="form-label">📅 时间</label>
-          <input type="text" class="form-input" placeholder="2024-05-04 14:00">
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">📍 地点</label>
-          <input type="text" class="form-input" placeholder="线下地址 或 线上会议链接">
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">👥 人数上限</label>
-          <input type="number" class="form-input" placeholder="15" value="15">
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">💎 所需积分</label>
-          <input type="number" class="form-input" placeholder="10" value="10">
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">📖 活动介绍</label>
-          <textarea class="form-input" placeholder="详细描述活动内容，让大家了解要做什么..."></textarea>
-        </div>
-        
-        <button class="btn btn-secondary" onclick="createEvent()">🚀 发布活动</button>
+        <button class="btn btn-primary" onclick="showToast('🚀 活动已发布！', '等待小伙伴报名吧 🎉', '➕')">🚀 发布活动</button>
       </div>
       <div class="tab-bar">
         <div class="tab-item" onclick="showScreen('screen-home')">
@@ -1115,47 +719,24 @@
       </div>
       <div class="content">
         <div class="card">
-          <div class="card-meta">
-            <span>📅 5月4日 周六 14:00-17:00</span>
-          </div>
-          <div class="card-meta">
-            <span>📍 朝阳区望京共享客厅</span>
-          </div>
-          <div class="card-meta">
-            <span>👥 已报名 8/15 人</span>
-          </div>
-          <div class="card-meta">
-            <span>💎 积分 10分</span>
-          </div>
-          <div class="card-meta">
-            <span>🏠 蓝调创意空间</span>
-          </div>
+          <div class="card-meta"><span>📅 5月4日 14:00-17:00</span></div>
+          <div class="card-meta"><span>📍 朝阳区望京</span></div>
+          <div class="card-meta"><span>💎 积分 10分</span></div>
+          <div class="card-meta"><span>🏠 蓝调创意空间</span></div>
         </div>
         
         <div class="section-title">📖 活动介绍</div>
         <div class="card">
           <div class="card-desc">
-            这是一本关于群体心理学的经典著作。我们将一起阅读、讨论，探讨：
-            <br><br>
+            这是一本关于群体心理学的经典著作。我们将一起阅读、讨论，探讨：<br><br>
             • 个人在群体中为什么会失去独立判断？<br>
             • 如何在群体中保持清醒？<br>
-            • 群体智慧 vs 群体盲从<br>
-            <br>
+            • 群体智慧 vs 群体盲从<br><br>
             不需要提前读完，现场一起读也OK！😊
           </div>
         </div>
         
-        <div class="section-title">👤 主理人</div>
-        <div class="list-item">
-          <div class="host-avatar">李</div>
-          <div class="list-content">
-            <div class="list-title">李明</div>
-            <div class="list-desc">发起活动 23 次 · 好评率 98%</div>
-          </div>
-          <span class="badge badge-host">👑 主理人</span>
-        </div>
-        
-        <button class="btn btn-primary" onclick="registerEvent()">🎉 立即报名（-10积分）</button>
+        <button class="btn btn-primary" onclick="showToast('🎉 报名成功！', '已扣除 10 积分\\n活动前会提醒你', '✅')">🎉 立即报名（-10积分）</button>
       </div>
       <div class="tab-bar">
         <div class="tab-item" onclick="showScreen('screen-home')">
@@ -1181,17 +762,17 @@
     <div class="screen" id="screen-profile">
       <div class="header">
         <div style="display: flex; align-items: center; gap: 16px;">
-          <div class="avatar">达</div>
+          <div class="host-avatar" style="width: 60px; height: 60px; font-size: 26px;">达</div>
           <div>
             <div class="header-title" style="font-size: 24px;">达哥</div>
-            <span class="badge badge-host">👑 主理人</span>
+            <div style="font-size: 11px; background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; display: inline-block;">👑 主理人</div>
           </div>
         </div>
       </div>
       <div class="content">
-        <div class="points-card">
-          <div class="points-value">128</div>
-          <div class="points-label">💎 我的积分</div>
+        <div class="card" style="background: linear-gradient(135deg, #FFB347 0%, #FFCC70 100%); color: #5A4000; border: none;">
+          <div style="font-size: 52px; font-weight: bold;">128</div>
+          <div style="font-size: 14px; opacity: 0.8;">💎 我的积分</div>
         </div>
         
         <div class="section-title">🏠 我的空间</div>
@@ -1203,59 +784,6 @@
             <span>主理人</span>
           </div>
           <div class="card-desc">科技创新主题 · 8位成员 · 好评率 95%</div>
-        </div>
-        
-        <div class="section-title">📊 我的统计</div>
-        <div class="stats-bar">
-          <div class="stat-item">
-            <div class="stat-value">5</div>
-            <div class="stat-label">发起</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value">12</div>
-            <div class="stat-label">参与</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value">45</div>
-            <div class="stat-label">共居天</div>
-          </div>
-        </div>
-        
-        <div class="section-title">⏱️ 快捷入口</div>
-        <div class="list-item">
-          <div class="list-icon">📋</div>
-          <div class="list-content">
-            <div class="list-title">我报名的活动</div>
-            <div class="list-desc">3 个进行中</div>
-          </div>
-          <span style="color: var(--klein); font-size: 20px;">→</span>
-        </div>
-        
-        <div class="list-item">
-          <div class="list-icon">🎯</div>
-          <div class="list-content">
-            <div class="list-title">我发起的活动</div>
-            <div class="list-desc">2 个待开始</div>
-          </div>
-          <span style="color: var(--klein); font-size: 20px;">→</span>
-        </div>
-        
-        <div class="list-item">
-          <div class="list-icon">💰</div>
-          <div class="list-content">
-            <div class="list-title">积分明细</div>
-            <div class="list-desc">查看获取和消费记录</div>
-          </div>
-          <span style="color: var(--klein); font-size: 20px;">→</span>
-        </div>
-        
-        <div class="list-item">
-          <div class="list-icon">⚙️</div>
-          <div class="list-content">
-            <div class="list-title">设置</div>
-            <div class="list-desc">个人信息、通知设置</div>
-          </div>
-          <span style="color: var(--klein); font-size: 20px;">→</span>
         </div>
       </div>
       <div class="tab-bar">
@@ -1277,7 +805,6 @@
         </div>
       </div>
     </div>
-    
   </div>
   
   <!-- Toast -->
@@ -1289,6 +816,26 @@
   </div>
   
   <script>
+    // Space data
+    const spaces = {
+      creative: {
+        name: '🎨 蓝调创意空间',
+        theme: '艺术创作',
+        location: '朝阳区',
+        rooms: '8个房间',
+        desc: '专注艺术创作的共居空间，适合设计师、插画师、音乐家等创意工作者。空间宽敞明亮，有独立创作室、共享画廊、冥想角。每周举办创作分享会，鼓励成员互相交流灵感。',
+        photos: ['🎨', '🖼️', '🎭', '🎪', '🎵']
+      },
+      tech: {
+        name: '💻 极客互联空间',
+        theme: '科技创新',
+        location: '海淀区',
+        rooms: '12个房间',
+        desc: '程序员和创业者的乐园，高速网络、24小时自习室、会议室、VR体验区。定期举办技术分享、黑客马拉松、创业路演。适合科技从业者、创业者、数字游民。',
+        photos: ['💻', '📡', '🤖', '🎮', '🔬']
+      }
+    };
+    
     function showScreen(screenId) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.getElementById(screenId).classList.add('active');
@@ -1305,7 +852,7 @@
     
     function showToast(title, desc, icon) {
       document.getElementById('toast-title').textContent = title;
-      document.getElementById('toast-desc').innerHTML = desc.replace(/\n/g, '<br>');
+      document.getElementById('toast-desc').innerHTML = desc.replace(/\\n/g, '<br>');
       document.getElementById('toast-icon').textContent = icon || '✅';
       document.getElementById('toast').classList.add('show');
     }
@@ -1314,23 +861,34 @@
       document.getElementById('toast').classList.remove('show');
     }
     
-    function selectChannel(type) {
-      document.querySelectorAll('.channel-card').forEach(c => c.classList.remove('active'));
-      event.currentTarget.classList.add('active');
+    function selectIdentity(el, type) {
+      document.querySelectorAll('.radio-option').forEach(r => r.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+    
+    function showSpaceDetail(type) {
+      const space = spaces[type];
+      const cover = document.getElementById('space-detail-cover');
+      cover.className = 'space-detail-cover ' + type;
       
-      if (type === 'host') {
-        showToast('👑 申请成为主理人', '即将跳转到主理人申请表单\n需要填写空间规划、个人介绍等', '📝');
-      } else {
-        showToast('🤝 申请成为居民', '即将跳转到居民申请表单\n可以选择具体空间或填写通用申请', '📝');
-      }
+      document.getElementById('space-detail-title').textContent = space.name;
+      document.getElementById('space-detail-location').textContent = '📍 ' + space.location;
+      document.getElementById('space-detail-rooms').textContent = '🏠 ' + space.rooms;
+      document.getElementById('space-detail-desc').textContent = space.desc;
+      document.getElementById('space-detail-theme').textContent = space.theme;
+      document.getElementById('space-detail-loc').textContent = space.location;
+      document.getElementById('space-detail-room-num').textContent = space.rooms;
+      
+      const photosHtml = space.photos.map(p => 
+        `<div class="photo-item ${type}">${p}</div>`
+      ).join('');
+      document.getElementById('space-photos').innerHTML = photosHtml;
+      
+      showScreen('screen-space-detail');
     }
     
-    function registerEvent() {
-      showToast('🎉 报名成功！', '已扣除 10 积分\n活动前会微信提醒你\n积分剩余：118', '✅');
-    }
-    
-    function createEvent() {
-      showToast('🚀 活动已发布！', '等待小伙伴报名吧 🎉\n作为主理人，你将获得 5 积分奖励', '➕');
+    function submitApply() {
+      showToast('📝 申请已提交', '我们会尽快处理你的申请\\n并保持微信通知你结果 💬', '✅');
     }
   </script>
 </body>
