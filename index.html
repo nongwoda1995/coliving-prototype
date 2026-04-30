@@ -9,7 +9,6 @@
   --klein: #002FA7;
   --klein-light: #1E4FD0;
   --klein-lighter: #5B7FFF;
-  --mint: #00D4AA;
   --gold: #FFB347;
   --bg: #F8FAFF;
   --text: #0D1B2A;
@@ -34,7 +33,7 @@ body {
   position: relative;
 }
 .screen {
-  width: 100%; height: 100%;
+  width:100%; height:100%;
   display: none;
   flex-direction: column;
 }
@@ -43,7 +42,19 @@ body {
   padding: 50px 20px 24px;
   background: linear-gradient(135deg, var(--klein) 0%, var(--klein-light) 100%);
   color: white;
+  position: relative;
+  overflow: hidden;
 }
+/* 克莱因蓝渐变头图 - 纯CSS，不依赖外部图片 */
+.header-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: 
+    linear-gradient(135deg, rgba(0,47,167,0.95) 0%, rgba(30,79,208,0.9) 30%, rgba(91,127,255,0.85) 60%, rgba(0,47,167,0.9) 100%),
+    repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.03) 20px);
+  z-index: 0;
+}
+.header > * { position: relative; z-index: 1; }
 .header-title { font-size: 26px; font-weight: bold; margin-bottom: 6px; }
 .header-subtitle { font-size: 13px; opacity: 0.9; }
 .header-simple {
@@ -75,39 +86,50 @@ body {
   display: inline-flex; background: linear-gradient(135deg, var(--gold) 0%, #FFD700 100%);
   color: #5A4000; padding: 5px 14px; border-radius: 20px; font-size: 11px; margin-right: 8px; font-weight: 700;
 }
+.card-badge {
+  display: inline-flex; background: rgba(46,204,113,0.1); color: #27AE60;
+  padding: 5px 14px; border-radius: 20px; font-size: 11px; margin-right: 8px; font-weight: 600;
+}
+.quota-badge {
+  display: inline-flex; background: rgba(231,76,60,0.1); color: #E74C3C;
+  padding: 5px 14px; border-radius: 20px; font-size: 11px; margin-right: 8px; font-weight: 600;
+}
+.resident-badge {
+  display: inline-flex; background: rgba(46,204,113,0.1); color: #27AE60;
+  padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 600;
+  margin-left: 8px;
+}
 .space-card {
   background: white; border-radius: 24px; margin-bottom: 16px;
   box-shadow: 0 8px 32px rgba(0,47,167,0.12); cursor: pointer; transition: all 0.3s; overflow: hidden;
 }
 .space-card:hover { transform: translateY(-6px); }
-.space-cover { height: 160px; position: relative; display: flex; align-items: flex-end; padding: 16px; color: white; }
-.space-cover.creative { background: linear-gradient(135deg, #FF6B9D 0%, #FFB8D0 100%); }
-.space-cover.tech { background: linear-gradient(135deg, var(--klein) 0%, var(--klein-lighter) 100%); }
-.space-cover.nature { background: linear-gradient(135deg, #2ECC71 0%, #58D68D 100%); }
-.space-name { font-size: 22px; font-weight: bold; text-shadow: 0 2px 12px rgba(0,0,0,0.3); position: relative; z-index: 1; }
+.space-cover { height: 160px; position: relative; display: flex; align-items: flex-end; padding: 16px; color: white; background-size: cover; background-position: center; }
+.space-cover.creative { background-image: url('https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80'); }
+.space-cover.tech { background-image: url('https://images.unsplash.com/photo-1498050844625-79b983197a1c?w=800&q=80'); }
+.space-cover.nature { background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80'); }
+.space-name { font-size: 22px; font-weight: bold; text-shadow: 0 2px 12px rgba(0,0,0,0.5); position: relative; z-index: 1; }
 .space-body { padding: 18px; }
 .space-theme { display: inline-flex; background: rgba(0,47,167,0.08); color: var(--klein); padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; margin-bottom: 12px; }
 .space-info { display: flex; gap: 16px; margin-bottom: 14px; font-size: 12px; color: var(--text-light); }
-.space-host { display: flex; align-items: center; gap: 12px; padding-top: 14px; border-top: 1px solid rgba(0,47,167,0.06); }
-.host-avatar {
-  width: 40px; height: 40px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--klein) 0%, var(--klein-lighter) 100%);
-  display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; font-weight: 700;
+.host-card {
+  display: flex; align-items: center; gap: 12px; padding: 14px;
+  background: linear-gradient(135deg, rgba(0,47,167,0.03) 0%, rgba(0,47,167,0.01) 100%);
+  border-radius: 16px; margin-bottom: 16px;
 }
-.host-name { font-size: 14px; font-weight: 600; color: var(--text); }
-.host-desc { font-size: 11px; color: var(--text-light); margin-top: 2px; }
-.space-detail-cover { height: 220px; position: relative; color: white; }
-.space-detail-cover.creative { background: linear-gradient(135deg, #FF6B9D 0%, #FFB8D0 100%); }
-.space-detail-cover.tech { background: linear-gradient(135deg, var(--klein) 0%, var(--klein-lighter) 100%); }
-.space-detail-cover.nature { background: linear-gradient(135deg, #2ECC71 0%, #58D68D 100%); }
-.cover-content { position: absolute; bottom: 20px; left: 20px; right: 20px; z-index: 1; }
-.cover-title { font-size: 28px; font-weight: bold; text-shadow: 0 3px 15px rgba(0,0,0,0.3); margin-bottom: 8px; }
-.cover-meta { display: flex; gap: 12px; font-size: 12px; opacity: 0.9; }
+.host-avatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--klein) 0%, var(--klein-lighter) 100%);
+  display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; font-weight: 700;
+  flex-shrink: 0;
+}
+.host-info { flex:1; }
+.host-name { font-size: 15px; font-weight: 600; color: var(--text); }
+.host-desc { font-size: 12px; color: var(--text-light); margin-top: 3px; }
+.host-stats { display: flex; gap: 12px; margin-top: 6px; font-size: 11px; color: var(--text-light); }
+.host-stat { display: flex; align-items: center; gap: 4px; }
 .photo-gallery { display: flex; gap: 8px; overflow-x: auto; padding: 16px 0; margin: 0 -16px; padding-left: 16px; }
-.photo-item { min-width: 120px; height: 90px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 32px; flex-shrink: 0; }
-.photo-item.creative { background: linear-gradient(135deg, #FF6B9D 0%, #FFB8D0 100%); }
-.photo-item.tech { background: linear-gradient(135deg, var(--klein) 0%, var(--klein-lighter) 100%); }
-.photo-item.nature { background: linear-gradient(135deg, #2ECC71 0%, #58D68D 100%); }
+.photo-item { min-width: 120px; height: 90px; border-radius: 12px; background-size: cover; background-position: center; flex-shrink: 0; }
 .form-group { margin-bottom: 20px; }
 .form-label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 10px; color: var(--text); }
 .form-input {
@@ -115,6 +137,7 @@ body {
   border-radius: 16px; font-size: 14px; font-family: inherit; background: white; color: var(--text);
 }
 textarea.form-input { resize: none; height: 100px; }
+.form-hint { font-size: 11px; color: var(--text-light); margin-top: 6px; }
 .radio-group { display: flex; gap: 12px; margin-bottom: 20px; }
 .radio-option {
   flex: 1; padding: 14px; border: 2px solid rgba(0,47,167,0.1);
@@ -177,23 +200,51 @@ textarea.form-input { resize: none; height: 100px; }
   <!-- 首页 -->
   <div class="screen active" id="screen-home">
     <div class="header">
+      <div class="header-bg"></div>
       <div class="header-title">🏠 克莱因共居社区</div>
       <div class="header-subtitle">一起生活，一起创作生活 ✨</div>
     </div>
     <div class="content">
+      <div class="section-title">🔥 近期活动</div>
+      
       <div class="card" onclick="showScreen('screen-detail')">
-        <span class="card-tag">🔥 热门</span>
-        <span class="card-points">💎 50积分起</span>
+        <span class="card-tag">热门</span>
+        <span class="card-points">💎 50积分</span>
+        <span class="quota-badge">还剩8个名额</span>
         <div class="card-title">📚 周末读书会</div>
         <div class="card-meta"><span>📅 5月4日 14:00</span><span>📍 朝阳区</span><span>🏠 蓝调创意空间</span></div>
         <div class="card-desc">共读《乌合之众》，探讨群体心理学...</div>
+        <div style="margin-top: 10px;"><span class="resident-badge">🏠 居民免门票</span></div>
       </div>
+      
       <div class="card">
         <span class="card-tag">线上</span>
-        <span class="card-points">💎 30积分起</span>
+        <span class="card-points">💎 30积分</span>
+        <span class="quota-badge">还剩15个名额</span>
         <div class="card-title">☕ Coffee Chat</div>
         <div class="card-meta"><span>📅 5月6日 21:00</span><span>📍 腾讯会议</span><span>🏠 极客互联空间</span></div>
         <div class="card-desc">聊聊创业路上的坑，互相支招 🤝</div>
+        <div style="margin-top: 10px;"><span class="resident-badge">🏠 居民五折</span></div>
+      </div>
+      
+      <div class="card">
+        <span class="card-tag">线下</span>
+        <span class="card-points">💎 80积分</span>
+        <span class="quota-badge">还剩5个名额</span>
+        <div class="card-title">🎨 艺术创作工坊</div>
+        <div class="card-meta"><span>📅 5月8日 10:00</span><span>📍 朝阳区</span><span>🏠 蓝调创意空间</span></div>
+        <div class="card-desc">一起画画、做手工，释放创造力 🎨</div>
+        <div style="margin-top: 10px;"><span class="resident-badge">🏠 居民免门票</span></div>
+      </div>
+      
+      <div class="card">
+        <span class="card-tag">技术</span>
+        <span class="card-points">¥50 / 💎 50积分</span>
+        <span class="quota-badge">还剩20个名额</span>
+        <div class="card-title">💻 黑客马拉松</div>
+        <div class="card-meta"><span>📅 5月10日 09:00</span><span>📍 海淀区</span><span>🏠 极客互联空间</span></div>
+        <div class="card-desc">24小时编程挑战，丰厚奖品等你拿 🏆</div>
+        <div style="margin-top: 10px;"><span class="resident-badge">🏠 居民五折</span></div>
       </div>
     </div>
     <div class="tab-bar">
@@ -258,9 +309,16 @@ textarea.form-input { resize: none; height: 100px; }
         <div class="space-body">
           <span class="space-theme">🎨 艺术创作</span>
           <div class="space-info"><span>📍 朝阳区</span><span>🏠 8个房间</span></div>
-          <div class="space-host">
+          <div class="host-card">
             <div class="host-avatar">小</div>
-            <div><div class="host-name">小鱼 · 主理人</div><div class="host-desc">艺术家 · 好评率 98%</div></div>
+            <div class="host-info">
+              <div class="host-name">小鱼 · 主理人</div>
+              <div class="host-desc">艺术家 · 好评率 98%</div>
+              <div class="host-stats">
+                <span class="host-stat">📅 运营3年</span>
+                <span class="host-stat">👥 服务120+人</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -270,9 +328,16 @@ textarea.form-input { resize: none; height: 100px; }
         <div class="space-body">
           <span class="space-theme">💻 科技创新</span>
           <div class="space-info"><span>📍 海淀区</span><span>🏠 12个房间</span></div>
-          <div class="space-host">
+          <div class="host-card">
             <div class="host-avatar">达</div>
-            <div><div class="host-name">达哥 · 主理人</div><div class="host-desc">全栈开发者 · 好评率 95%</div></div>
+            <div class="host-info">
+              <div class="host-name">达哥 · 主理人</div>
+              <div class="host-desc">全栈开发者 · 好评率 95%</div>
+              <div class="host-stats">
+                <span class="host-stat">📅 运营2年</span>
+                <span class="host-stat">👥 服务80+人</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -297,8 +362,33 @@ textarea.form-input { resize: none; height: 100px; }
       </div>
       <div class="section-title" style="margin-top:20px;">📷 空间照片</div>
       <div class="photo-gallery" id="space-photos"></div>
+      
+      <div class="section-title">🙋 主理人介绍</div>
+      <div class="host-card" id="space-host-detail">
+        <div class="host-avatar" id="space-host-avatar">小</div>
+        <div class="host-info">
+          <div class="host-name" id="space-host-name">小鱼 · 主理人</div>
+          <div class="host-desc" id="space-host-desc">艺术家 · 好评率 98%</div>
+          <div class="host-stats">
+            <span class="host-stat">📅 运营3年</span>
+            <span class="host-stat">👥 服务120+人</span>
+            <span class="host-stat">💎 贡献值 320</span>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="space-host-bio">
+        <div class="card-desc" id="space-host-bio-text">
+          <strong>🎨 关于小鱼：</strong><br><br>
+          央美油画系毕业，做过7年独立艺术家，作品曾在798、草场地展出。2021年创办蓝调创意空间，希望为创作者提供一个有温度的共居环境。<br><br>
+          <strong>擅长：</strong>绘画、装置艺术、策展<br>
+          <strong>理念：</strong>「艺术不是少数人的特权，而是每个人表达自我的方式」<br>
+          <strong>联系方式：</strong>微信 xiaoyu_art
+        </div>
+      </div>
+      
       <div class="section-title">📖 空间介绍</div>
       <div class="card"><div class="card-desc" id="space-detail-desc">空间介绍...</div></div>
+      
       <div class="section-title">📊 空间信息</div>
       <div class="card">
         <div class="info-row"><span class="info-label">主题</span><span class="info-value" id="space-detail-theme">艺术创作</span></div>
@@ -324,21 +414,13 @@ textarea.form-input { resize: none; height: 100px; }
     <div class="content">
       <div style="background: linear-gradient(135deg, rgba(0,212,170,0.1) 0%, rgba(0,212,170,0.05) 100%); padding: 16px; border-radius: 16px; margin-bottom: 20px; font-size: 13px; color: #00A080; line-height: 1.7;">
         ✨ <strong>发起活动可获得 +20 积分！</strong><br>
-        积分是社区贡献的度量，可用于解锁更多权限
+        积分是社区贡献的度量，可用于解锁更多权限<br>
+        <span style="font-size: 11px; opacity: 0.7;">（具体积分规则由你设定）</span>
       </div>
       
       <div class="form-group">
         <label class="form-label">📝 活动名称</label>
         <input type="text" class="form-input" placeholder="给活动起个名字">
-      </div>
-      
-      <div class="form-group">
-        <label class="form-label">🏠 所属空间</label>
-        <select class="form-input">
-          <option>💻 极客互联空间（我的空间）</option>
-          <option>🎨 蓝调创意空间</option>
-          <option>🌿 森系生活空间</option>
-        </select>
       </div>
       
       <div class="form-group">
@@ -357,13 +439,9 @@ textarea.form-input { resize: none; height: 100px; }
       </div>
       
       <div class="form-group">
-        <label class="form-label">💎 参与门槛（积分）</label>
-        <select class="form-input">
-          <option>无门槛（所有人可参加）</option>
-          <option>需要 30 积分以上</option>
-          <option>需要 50 积分以上</option>
-          <option>需要 100 积分以上</option>
-        </select>
+        <label class="form-label">💎 参与门槛（积分或价格）</label>
+        <input type="text" class="form-input" placeholder="例如：50积分 或 ¥50">
+        <div class="form-hint">居民享受免门票或五折优惠</div>
       </div>
       
       <div class="form-group">
@@ -393,9 +471,33 @@ textarea.form-input { resize: none; height: 100px; }
         <div class="card-meta"><span>📅 5月4日 14:00-17:00</span></div>
         <div class="card-meta"><span>📍 朝阳区望京</span></div>
         <div class="card-meta"><span>🏠 蓝调创意空间</span></div>
-        <div class="card-meta"><span>💎 需 50 积分以上</span></div>
-        <div class="card-meta"><span>👥 限 15 人</span></div>
+        <div class="card-meta"><span>💎 需 50积分 或 ¥50</span></div>
+        <div class="card-meta"><span>👥 限 15 人（还剩 8 个名额）</span></div>
       </div>
+      
+      <div class="section-title">🙋 主理人介绍</div>
+      <div class="host-card">
+        <div class="host-avatar">小</div>
+        <div class="host-info">
+          <div class="host-name">小鱼 · 主理人</div>
+          <div class="host-desc">艺术家 · 好评率 98% · 蓝调创意空间创始人</div>
+          <div class="host-stats">
+            <span class="host-stat">📅 运营3年</span>
+            <span class="host-stat">👥 服务120+人</span>
+            <span class="host-stat">💎 贡献值 320</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-desc">
+          <strong>🎨 关于小鱼：</strong><br><br>
+          央美油画系毕业，做过7年独立艺术家，作品曾在798、草场地展出。2021年创办蓝调创意空间，希望为创作者提供一个有温度的共居环境。<br><br>
+          <strong>擅长：</strong>绘画、装置艺术、策展<br>
+          <strong>理念：</strong>「艺术不是少数人的特权，而是每个人表达自我的方式」<br>
+          <strong>联系方式：</strong>微信 xiaoyu_art
+        </div>
+      </div>
+      
       <div class="section-title">📖 活动介绍</div>
       <div class="card"><div class="card-desc">
         这是一本关于群体心理学的经典著作。我们将一起阅读、讨论，探讨：<br><br>
@@ -404,12 +506,29 @@ textarea.form-input { resize: none; height: 100px; }
         • 群体智慧 vs 群体盲从<br><br>
         不需要提前读完，现场一起读也OK！😊
       </div></div>
+      
+      <div class="section-title">🏠 居民优惠</div>
+      <div class="card">
+        <div class="card-desc" style="color: #27AE60; font-weight: 600;">
+          ✅ 本空间居民：<strong>免门票</strong>（0积分 / 免费）<br>
+          ✅ 其他共居居民：<strong>五折优惠</strong>（25积分 / ¥25）
+        </div>
+      </div>
+      
       <div class="section-title">💎 积分说明</div>
       <div class="card"><div class="card-desc">
         本活动需要 <strong>50积分以上</strong> 才能报名。<br>
-        积分代表你对社区的贡献度，可通过拉新、宣传、发起活动等方式获得。
+        积分代表你对社区的贡献度，可通过拉新、宣传、发起活动等方式获得。<br>
+        <span style="font-size: 11px; color: var(--text-light);">（具体积分规则由管理者设定）</span>
       </div></div>
-      <button class="btn btn-primary" onclick="showToast('🎉 报名成功！', '活动前会微信提醒你<br>记得准时参加哦 📅', '✅')">🎉 立即报名</button>
+      
+      <div class="form-group">
+        <label class="form-label">🎫 邀请码（选填）</label>
+        <input type="text" class="form-input" placeholder="输入朋友的邀请码，TA会获得奖励">
+        <div class="form-hint">如果有朋友邀请你，填写TA的邀请码</div>
+      </div>
+      
+      <button class="btn btn-primary" onclick="showToast('🎉 报名成功！', '活动前会微信提醒你<br>记得准时参加哦 📅', '✅')">🎉 立即报名（居民免门票）</button>
     </div>
     <div class="tab-bar">
       <div class="tab-item" onclick="showScreen('screen-home')"><div class="tab-icon">🏠</div><div class="tab-label">首页</div></div>
@@ -431,7 +550,7 @@ textarea.form-input { resize: none; height: 100px; }
       <div class="card points-card">
         <div class="points-big">128</div>
         <div class="points-label">💎 我的积分（贡献值）</div>
-        <div class="points-ways">拉新+30 | 宣传+10 | 发起活动+20</div>
+        <div class="points-ways">具体积分规则由你设定</div>
       </div>
       
       <div class="section-title">📊 积分明细</div>
@@ -475,7 +594,22 @@ const spaces = {
     location: '朝阳区',
     rooms: '8个房间',
     desc: '专注艺术创作的共居空间，适合设计师、插画师、音乐家等创意工作者。空间宽敞明亮，有独立创作室、共享画廊、冥想角。每周举办创作分享会，鼓励成员互相交流灵感。',
-    photos: ['🎨', '🖼️', '🎭', '🎪', '🎵']
+    host: { 
+      name: '小鱼', 
+      title: '主理人', 
+      desc: '艺术家 · 好评率 98%', 
+      years: 3, 
+      served: 120, 
+      points: 320,
+      bio: '<strong>🎨 关于小鱼：</strong><br><br>央美油画系毕业，做过7年独立艺术家，作品曾在798、草场地展出。2021年创办蓝调创意空间，希望为创作者提供一个有温度的共居环境。<br><br><strong>擅长：</strong>绘画、装置艺术、策展<br><strong>理念：</strong>「艺术不是少数人的特权，而是每个人表达自我的方式」<br><strong>联系方式：</strong>微信 xiaoyu_art'
+    },
+    photos: [
+      'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400&q=80',
+      'https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&q=80',
+      'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=400&q=80',
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80',
+      'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400&q=80'
+    ]
   },
   tech: {
     name: '💻 极客互联空间',
@@ -483,7 +617,22 @@ const spaces = {
     location: '海淀区',
     rooms: '12个房间',
     desc: '程序员和创业者的乐园，高速网络、24小时自习室、会议室、VR体验区。定期举办技术分享、黑客马拉松、创业路演。适合科技从业者、创业者、数字游民。',
-    photos: ['💻', '📡', '🤖', '🎮', '🔬']
+    host: { 
+      name: '达哥', 
+      title: '主理人', 
+      desc: '全栈开发者 · 好评率 95%', 
+      years: 2, 
+      served: 80, 
+      points: 280,
+      bio: '<strong>💻 关于达哥：</strong><br><br>前大厂全栈工程师，独立开发者，做过3个从0到1的产品。2022年创办极客互联空间，希望为技术人打造一个既能专注工作又能互相支持的环境。<br><br><strong>擅长：</strong>全栈开发、产品设计、创业指导<br><strong>理念：</strong>「技术改变世界，但首先改变的是我们自己」<br><strong>联系方式：</strong>微信 dage_dev'
+    },
+    photos: [
+      'https://images.unsplash.com/photo-1498050844625-79b983197a1c?w=400&q=80',
+      'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&q=80',
+      'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&q=80',
+      'https://images.unsplash.com/photo-1517245386807-b43f82c33c4?w=400&q=80',
+      'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&q=80'
+    ]
   }
 };
 
@@ -525,7 +674,19 @@ function showSpaceDetail(type) {
   document.getElementById('space-detail-theme').textContent = space.theme;
   document.getElementById('space-detail-loc').textContent = space.location;
   document.getElementById('space-detail-room-num').textContent = space.rooms;
-  const photosHtml = space.photos.map(p => '<div class="photo-item ' + type + '">' + p + '</div>').join('');
+  
+  // 主理人信息
+  const host = space.host;
+  document.getElementById('space-host-avatar').textContent = host.name.charAt(0);
+  document.getElementById('space-host-name').textContent = host.name + ' · ' + host.title;
+  document.getElementById('space-host-desc').textContent = host.desc;
+  document.getElementById('space-host-detail').querySelectorAll('.host-stat')[0].textContent = '📅 运营' + host.years + '年';
+  document.getElementById('space-host-detail').querySelectorAll('.host-stat')[1].textContent = '👥 服务' + host.served + '+人';
+  document.getElementById('space-host-detail').querySelectorAll('.host-stat')[2].textContent = '💎 贡献值 ' + host.points;
+  // 主理人详细介绍
+  document.getElementById('space-host-bio-text').innerHTML = host.bio;
+  
+  const photosHtml = space.photos.map(p => '<div class="photo-item" style="background-image: url(\'' + p + '\')"></div>').join('');
   document.getElementById('space-photos').innerHTML = photosHtml;
   showScreen('screen-space-detail');
 }
