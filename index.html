@@ -45,14 +45,13 @@ body {
   position: relative;
   overflow: hidden;
 }
-/* 克莱因蓝渐变头图 - 纯CSS，不依赖外部图片 */
+/* 克莱因蓝头图 - 真实图片背景 */
 .header-bg {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   background: 
-    linear-gradient(135deg, rgba(0,47,167,0.95) 0%, rgba(30,79,208,0.9) 30%, rgba(91,127,255,0.85) 60%, rgba(0,47,167,0.9) 100%),
-    repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.03) 20px);
-  z-index: 0;
+    linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,47,167,0.7) 100%),
+    url('https://images.unsplash.com/photo-1554995207-c18c203602cb?w=800&q=80') center/cover no-repeat;
 }
 .header > * { position: relative; z-index: 1; }
 .header-title { font-size: 26px; font-weight: bold; margin-bottom: 6px; }
@@ -154,7 +153,114 @@ textarea.form-input { resize: none; height: 100px; }
   color: white; box-shadow: 0 8px 24px rgba(0,47,167,0.35);
 }
 .btn-primary:hover { transform: translateY(-3px); }
+.btn-secondary { background: #fff; color: var(--klein); border: 1.5px solid var(--klein); }
 .btn-full { margin-top: 20px; }
+
+/* 首页内嵌切换tab */
+.home-tab-bar {
+  display: flex;
+  background: white;
+  border-radius: 14px;
+  padding: 4px;
+  margin-bottom: 20px;
+  gap: 4px;
+}
+.home-tab {
+  flex: 1;
+  text-align: center;
+  padding: 10px 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-light);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.home-tab.active {
+  background: var(--klein);
+  color: white;
+  font-weight: 600;
+}
+
+/* 浮动发布按钮 */
+.buddy-fab-right {
+  position: fixed;
+  right: 20px;
+  bottom: 90px;
+  width: 48px;
+  height: 48px;
+  background: var(--klein);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,47,167,0.4);
+  z-index: 100;
+  transition: transform 0.2s;
+}
+.buddy-fab-right:hover { transform: scale(1.1); }
+.buddy-fab-tooltip {
+  position: absolute;
+  right: 60px;
+  background: var(--text);
+  color: white;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.buddy-fab-right:hover .buddy-fab-tooltip { opacity: 1; }
+
+/* 搭子卡片 */
+.buddy-card {
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 12px rgba(0,47,167,0.08);
+}
+.buddy-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.buddy-avatar { width: 40px; height: 40px; background: #EEF2FF; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.buddy-name { font-size: 14px; font-weight: 600; color: var(--text); }
+.buddy-time { font-size: 11px; color: var(--text-light); }
+.buddy-body { font-size: 14px; line-height: 1.6; color: var(--text); margin-bottom: 10px; }
+.buddy-meta { display: flex; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+.buddy-meta-item { font-size: 12px; color: var(--text-light); display: flex; align-items: center; gap: 4px; }
+.buddy-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+.buddy-tag { background: #EEF2FF; color: var(--klein-light); font-size: 12px; padding: 4px 10px; border-radius: 20px; }
+.buddy-tag.selected { background: var(--klein); color: white; }
+.buddy-type-btn {
+  background: #EEF2FF;
+  color: var(--klein-light);
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+.buddy-type-btn.selected {
+  background: var(--klein);
+  color: white;
+}
+.buddy-actions { display: flex; gap: 16px; border-top: 1px solid #f0f0f0; padding-top: 10px; }
+.buddy-action { font-size: 13px; color: var(--text-light); cursor: pointer; display: flex; align-items: center; gap: 4px; }
+.buddy-action.liked { color: #e74c3c; }
+.buddy-comments { margin-top: 12px; background: #F8FAFF; border-radius: 10px; padding: 10px; }
+.buddy-comment { display: flex; gap: 8px; margin-bottom: 8px; }
+.buddy-comment:last-of-type { margin-bottom: 0; }
+.buddy-comment-avatar { width: 24px; height: 24px; background: #EEF2FF; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+.buddy-comment-body { font-size: 13px; color: var(--text); line-height: 1.5; }
+.buddy-comment-body .c-name { font-weight: 600; margin-right: 4px; }
+.buddy-comment-input { display: flex; gap: 8px; margin-top: 10px; }
+.buddy-comment-input input { flex: 1; border: 1px solid #E8EEFF; border-radius: 20px; padding: 6px 12px; font-size: 13px; outline: none; }
+.buddy-comment-input button { background: var(--klein); color: white; border: none; border-radius: 20px; padding: 6px 14px; font-size: 12px; cursor: pointer; }
 .tab-bar { display: flex; background: white; padding: 12px 8px 28px; border-top: 1px solid #eee; }
 .tab-item {
   flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px;
@@ -191,6 +297,42 @@ textarea.form-input { resize: none; height: 100px; }
 .points-big { font-size: 52px; font-weight: bold; }
 .points-label { font-size: 14px; opacity: 0.8; }
 .points-ways { font-size: 12px; opacity: 0.7; margin-top: 12px; }
+.filter-tag {
+  display: inline-flex; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 600;
+  background: white; color: var(--text-light); cursor: pointer; transition: all 0.3s; border: 1px solid rgba(0,47,167,0.1);
+  white-space: nowrap; flex-shrink: 0;
+}
+.filter-tag:hover { background: rgba(0,47,167,0.05); }
+.filter-tag.active {
+  background: linear-gradient(135deg, var(--klein) 0%, var(--klein-light) 100%);
+  color: white; border-color: transparent;
+}
+.search-input {
+  width: 100%; padding: 14px 18px; border: 2px solid rgba(0,47,167,0.1);
+  border-radius: 24px; font-size: 14px; font-family: inherit; background: white;
+  transition: all 0.3s;
+}
+.search-input:focus {
+  outline: none; border-color: var(--klein); box-shadow: 0 4px 16px rgba(0,47,167,0.1);
+}
+/* 报名弹窗 */
+.register-modal {
+  position: fixed; bottom: 0; left: 0; right: 0; top: 0;
+  background: rgba(0,0,0,0.5); z-index: 999; display: flex; align-items: flex-end;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.register-modal.show { opacity: 1; pointer-events: auto; }
+.register-panel {
+  width: 100%; background: white; border-radius: 28px 28px 0 0; padding: 24px;
+  transform: translateY(100%); transition: transform 0.3s; max-height: 80vh; overflow-y: auto;
+}
+.register-modal.show .register-panel { transform: translateY(0); }
+.register-handle { width: 40px; height: 4px; background: #ddd; border-radius: 2px; margin: 0 auto 16px; }
+.register-title { font-size: 20px; font-weight: bold; margin-bottom: 16px; text-align: center; }
+.register-info { background: rgba(0,47,167,0.03); border-radius: 16px; padding: 16px; margin-bottom: 16px; }
+.register-row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 13px; }
+.register-label { color: var(--text-light); }
+.register-value { font-weight: 600; color: var(--text); }
 </style>
 </head>
 <body>
@@ -204,47 +346,61 @@ textarea.form-input { resize: none; height: 100px; }
       <div class="header-title">🏠 克莱因共居社区</div>
       <div class="header-subtitle">一起生活，一起创作生活 ✨</div>
     </div>
-    <div class="content">
-      <div class="section-title">🔥 近期活动</div>
-      
-      <div class="card" onclick="showScreen('screen-detail')">
-        <span class="card-tag">热门</span>
-        <span class="card-points">💎 50积分</span>
-        <span class="quota-badge">还剩8个名额</span>
-        <div class="card-title">📚 周末读书会</div>
-        <div class="card-meta"><span>📅 5月4日 14:00</span><span>📍 朝阳区</span><span>🏠 蓝调创意空间</span></div>
-        <div class="card-desc">共读《乌合之众》，探讨群体心理学...</div>
-        <div style="margin-top: 10px;"><span class="resident-badge">🏠 居民免门票</span></div>
+    <div class="content" style="position:relative;">
+      <div class="home-tab-bar">
+        <div class="home-tab active" id="tab-activities" onclick="switchHomeTab('activities')">🔥 近期活动</div>
+        <div class="home-tab" id="tab-buddy" onclick="switchHomeTab('buddy')">🤝 找搭子</div>
       </div>
-      
-      <div class="card">
-        <span class="card-tag">线上</span>
-        <span class="card-points">💎 30积分</span>
-        <span class="quota-badge">还剩15个名额</span>
-        <div class="card-title">☕ Coffee Chat</div>
-        <div class="card-meta"><span>📅 5月6日 21:00</span><span>📍 腾讯会议</span><span>🏠 极客互联空间</span></div>
-        <div class="card-desc">聊聊创业路上的坑，互相支招 🤝</div>
-        <div style="margin-top: 10px;"><span class="resident-badge">🏠 居民五折</span></div>
+
+      <!-- 近期活动内容 -->
+      <div id="home-activities">
+        <!-- 日期筛选 -->
+        <div style="display:flex;gap:8px;margin-bottom:16px;overflow-x:auto;padding-bottom:8px;">
+          <span class="filter-tag active" onclick="filterByDate('all', this)">全部</span>
+          <span class="filter-tag" onclick="filterByDate('weekend', this)">周末</span>
+          <span class="filter-tag" onclick="filterByDate('weekday', this)">工作日</span>
+          <span class="filter-tag" onclick="filterByDate('this-week', this)">本周</span>
+          <span class="filter-tag" onclick="filterByDate('next-week', this)">下周</span>
+        </div>
+        <!-- 活动列表容器 -->
+        <div id="activities-container"></div>
       </div>
-      
-      <div class="card">
-        <span class="card-tag">线下</span>
-        <span class="card-points">💎 80积分</span>
-        <span class="quota-badge">还剩5个名额</span>
-        <div class="card-title">🎨 艺术创作工坊</div>
-        <div class="card-meta"><span>📅 5月8日 10:00</span><span>📍 朝阳区</span><span>🏠 蓝调创意空间</span></div>
-        <div class="card-desc">一起画画、做手工，释放创造力 🎨</div>
-        <div style="margin-top: 10px;"><span class="resident-badge">🏠 居民免门票</span></div>
-      </div>
-      
-      <div class="card">
-        <span class="card-tag">技术</span>
-        <span class="card-points">¥50 / 💎 50积分</span>
-        <span class="quota-badge">还剩20个名额</span>
-        <div class="card-title">💻 黑客马拉松</div>
-        <div class="card-meta"><span>📅 5月10日 09:00</span><span>📍 海淀区</span><span>🏠 极客互联空间</span></div>
-        <div class="card-desc">24小时编程挑战，丰厚奖品等你拿 🏆</div>
-        <div style="margin-top: 10px;"><span class="resident-badge">🏠 居民五折</span></div>
+
+      <!-- 找搭子内容 -->
+      <div id="home-buddy" style="display:none;">
+        <div id="buddy-list"></div>
+        <!-- 浮动发布按钮 -->
+        <div class="buddy-fab-right" onclick="toggleBuddyCompose()">
+          <span>+</span>
+          <div class="buddy-fab-tooltip">想找搭子</div>
+        </div>
+        <!-- 发布面板（底部弹出） -->
+        <div id="buddy-compose-panel" style="display:none;position:fixed;bottom:0;left:0;right:0;background:white;padding:20px 16px;z-index:200;border-radius:20px 20px 0 0;box-shadow:0 -4px 20px rgba(0,0,0,0.12);">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+            <div style="font-size:16px;font-weight:600;color:var(--text);">发布</div>
+            <div style="font-size:24px;cursor:pointer;color:var(--text-light);" onclick="toggleBuddyCompose()">×</div>
+          </div>
+          <textarea id="buddy-text" placeholder="想找个人一起…" style="width:100%;border:1px solid #E8EEFF;border-radius:12px;padding:12px;font-size:14px;resize:none;height:80px;outline:none;font-family:inherit;box-sizing:border-box;margin-bottom:12px;"></textarea>
+          <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+            <span class="buddy-type-btn" onclick="selectBuddyType(this,'aa')">AA</span>
+            <span class="buddy-type-btn" onclick="selectBuddyType(this,'treat')">请客</span>
+            <span class="buddy-type-btn" onclick="selectBuddyType(this,'free')">免费</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+            <span style="font-size:13px;color:var(--text-light);">人数上限：</span>
+            <input id="buddy-quota" type="number" value="3" min="2" max="20" style="width:60px;border:1px solid #E8EEFF;border-radius:8px;padding:6px 10px;font-size:14px;text-align:center;outline:none;">
+            <span style="font-size:13px;color:var(--text-light);">人</span>
+          </div>
+          <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;">
+            <span class="buddy-tag" style="cursor:pointer;" onclick="toggleBuddyTag(this)">约饭</span>
+            <span class="buddy-tag" style="cursor:pointer;" onclick="toggleBuddyTag(this)">遛弯</span>
+            <span class="buddy-tag" style="cursor:pointer;" onclick="toggleBuddyTag(this)">拼车</span>
+            <span class="buddy-tag" style="cursor:pointer;" onclick="toggleBuddyTag(this)">运动</span>
+            <span class="buddy-tag" style="cursor:pointer;" onclick="toggleBuddyTag(this)">看电影</span>
+            <span class="buddy-tag" style="cursor:pointer;" onclick="toggleBuddyTag(this)">其他</span>
+          </div>
+          <button class="btn btn-primary" onclick="publishBuddy()" style="width:100%;font-size:14px;">发出去</button>
+        </div>
       </div>
     </div>
     <div class="tab-bar">
@@ -409,47 +565,75 @@ textarea.form-input { resize: none; height: 100px; }
   <div class="screen" id="screen-create">
     <div class="header-simple">
       <div class="header-title">➕ 发起活动</div>
-      <div class="header-subtitle">主理人专属 · 贡献得积分 🎯</div>
+      <div class="header-subtitle">主理人专属 · 贡献得克莱因币 🎯</div>
     </div>
     <div class="content">
       <div style="background: linear-gradient(135deg, rgba(0,212,170,0.1) 0%, rgba(0,212,170,0.05) 100%); padding: 16px; border-radius: 16px; margin-bottom: 20px; font-size: 13px; color: #00A080; line-height: 1.7;">
-        ✨ <strong>发起活动可获得 +20 积分！</strong><br>
-        积分是社区贡献的度量，可用于解锁更多权限<br>
-        <span style="font-size: 11px; opacity: 0.7;">（具体积分规则由你设定）</span>
+        ✨ <strong>发起活动可获得 +20 克莱因币！</strong><br>
+        克莱因币是社区贡献的度量，可用于解锁更多权限<br>
+        <span style="font-size: 11px; opacity: 0.7;">（具体克莱因币规则由你设定）</span>
       </div>
       
       <div class="form-group">
-        <label class="form-label">📝 活动名称</label>
-        <input type="text" class="form-input" placeholder="给活动起个名字">
+        <label class="form-label">📝 活动名称 <span style="color:#FF4757;">*</span></label>
+        <input type="text" id="create-title" class="form-input" placeholder="给活动起个名字">
       </div>
       
       <div class="form-group">
-        <label class="form-label">📅 活动时间</label>
-        <input type="text" class="form-input" placeholder="例如：5月10日 14:00-17:00">
+        <label class="form-label">📅 活动日期 <span style="color:#FF4757;">*</span></label>
+        <input type="date" id="create-date" class="form-input" style="color:var(--text);">
+      </div>
+      
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+        <div class="form-group" style="margin-bottom:0;">
+          <label class="form-label">🕐 开始时间 <span style="color:#FF4757;">*</span></label>
+          <input type="time" id="create-start-time" class="form-input" value="14:00" style="color:var(--text);">
+        </div>
+        <div class="form-group" style="margin-bottom:0;">
+          <label class="form-label">🕐 结束时间 <span style="color:#FF4757;">*</span></label>
+          <input type="time" id="create-end-time" class="form-input" value="17:00" style="color:var(--text);">
+        </div>
       </div>
       
       <div class="form-group">
-        <label class="form-label">📍 活动地点</label>
-        <input type="text" class="form-input" placeholder="具体地址或线上会议链接">
+        <label class="form-label">📍 活动地点 <span style="color:#FF4757;">*</span></label>
+        <input type="text" id="create-location" class="form-input" placeholder="具体地址或线上会议链接">
       </div>
       
       <div class="form-group">
-        <label class="form-label">📖 活动介绍</label>
-        <textarea class="form-input" placeholder="活动内容、流程、注意事项..."></textarea>
+        <label class="form-label">📖 活动介绍 <span style="color:#FF4757;">*</span></label>
+        <textarea id="create-desc" class="form-input" rows="3" placeholder="活动内容、流程、注意事项..."></textarea>
       </div>
       
       <div class="form-group">
-        <label class="form-label">💎 参与门槛（积分或价格）</label>
-        <input type="text" class="form-input" placeholder="例如：50积分 或 ¥50">
+        <label class="form-label">💎 参与门槛（克莱因币）</label>
+        <input type="number" id="create-points" class="form-input" placeholder="例如：50" value="50" min="0">
         <div class="form-hint">居民享受免门票或五折优惠</div>
       </div>
       
       <div class="form-group">
         <label class="form-label">👥 人数上限</label>
-        <input type="number" class="form-input" placeholder="例如：20人" value="15">
+        <input type="number" id="create-quota" class="form-input" placeholder="例如：20" value="15" min="1" max="100">
       </div>
       
-      <button class="btn btn-primary" onclick="showToast('🚀 活动已发布！', '你获得 +20 积分贡献值 🎉<br>等待小伙伴报名吧', '➕')">🚀 发布活动（+20积分）</button>
+      <div class="form-group">
+        <label class="form-label">🏷️ 活动标签</label>
+        <select id="create-tag" class="form-input">
+          <option value="📚 读书">📚 读书分享</option>
+          <option value="☕">☕ 社交</option>
+          <option value="🎨 艺术">🎨 艺术创作</option>
+          <option value="💻 技术">💻 技术交流</option>
+          <option value="🎬 影视">🎬 影视娱乐</option>
+          <option value="🏃 运动">🏃 运动健身</option>
+          <option value="🍜 美食">🍜 美食烹饪</option>
+          <option value="🎵 音乐">🎵 音乐</option>
+          <option value="🌿 环保">🌿 环保</option>
+          <option value="🔧 其他">🔧 其他</option>
+        </select>
+      </div>
+      
+      <button class="btn btn-primary" onclick="publishActivity()">🚀 发布活动（+20克莱因币）</button>
+      <div style="height:24px;"></div>
     </div>
     <div class="tab-bar">
       <div class="tab-item" onclick="showScreen('screen-home')"><div class="tab-icon">🏠</div><div class="tab-label">首页</div></div>
@@ -471,7 +655,7 @@ textarea.form-input { resize: none; height: 100px; }
         <div class="card-meta"><span>📅 5月4日 14:00-17:00</span></div>
         <div class="card-meta"><span>📍 朝阳区望京</span></div>
         <div class="card-meta"><span>🏠 蓝调创意空间</span></div>
-        <div class="card-meta"><span>💎 需 50积分 或 ¥50</span></div>
+        <div class="card-meta"><span>💎 需 50克莱因币</span></div>
         <div class="card-meta"><span>👥 限 15 人（还剩 8 个名额）</span></div>
       </div>
       
@@ -510,16 +694,16 @@ textarea.form-input { resize: none; height: 100px; }
       <div class="section-title">🏠 居民优惠</div>
       <div class="card">
         <div class="card-desc" style="color: #27AE60; font-weight: 600;">
-          ✅ 本空间居民：<strong>免门票</strong>（0积分 / 免费）<br>
-          ✅ 其他共居居民：<strong>五折优惠</strong>（25积分 / ¥25）
+          ✅ 本空间居民：<strong>免门票</strong>（0克莱因币）<br>
+          ✅ 其他共居居民：<strong>五折优惠</strong>（25克莱因币）
         </div>
       </div>
       
-      <div class="section-title">💎 积分说明</div>
+      <div class="section-title">💎 克莱因币说明</div>
       <div class="card"><div class="card-desc">
-        本活动需要 <strong>50积分以上</strong> 才能报名。<br>
-        积分代表你对社区的贡献度，可通过拉新、宣传、发起活动等方式获得。<br>
-        <span style="font-size: 11px; color: var(--text-light);">（具体积分规则由管理者设定）</span>
+        本活动需要 <strong>50克莱因币以上</strong> 才能报名。<br>
+        克莱因币代表你对社区的贡献度，可通过拉新、宣传、发起活动等方式获得。<br>
+        <span style="font-size: 11px; color: var(--text-light);">（具体克莱因币规则由管理者设定）</span>
       </div></div>
       
       <div class="form-group">
@@ -549,16 +733,16 @@ textarea.form-input { resize: none; height: 100px; }
     <div class="content">
       <div class="card points-card">
         <div class="points-big">128</div>
-        <div class="points-label">💎 我的积分（贡献值）</div>
-        <div class="points-ways">具体积分规则由你设定</div>
+        <div class="points-label">💎 克莱因币余额</div>
+        <div class="points-ways">通过贡献社区获得，可抵扣活动报名</div>
       </div>
       
-      <div class="section-title">📊 积分明细</div>
+      <div class="section-title">📊 克莱因币明细</div>
       <div class="card">
         <div class="info-row"><span class="info-label">🎉 拉新（邀请3位好友）</span><span class="info-value" style="color:#2ECC71">+90</span></div>
         <div class="info-row"><span class="info-label">📢 宣传活动（分享4次）</span><span class="info-value" style="color:#2ECC71">+40</span></div>
         <div class="info-row"><span class="info-label">➕ 发起活动（1次）</span><span class="info-value" style="color:#2ECC71">+20</span></div>
-        <div class="info-row" style="border-bottom:none;"><span class="info-label">📝 新用户初始积分</span><span class="info-value" style="color:#2ECC71">-22</span></div>
+        <div class="info-row" style="border-bottom:none;"><span class="info-label">📝 新用户初始克莱因币</span><span class="info-value" style="color:#2ECC71">-22</span></div>
       </div>
       
       <div class="section-title">🏠 我的空间</div>
@@ -567,6 +751,78 @@ textarea.form-input { resize: none; height: 100px; }
         <div class="card-meta"><span>海淀区</span><span>12个房间</span><span>主理人</span></div>
         <div class="card-desc">科技创新主题 · 8位成员 · 好评率 95%</div>
       </div>
+      
+      <div class="section-title">📅 我的活动</div>
+      <div class="card" onclick="showScreen('screen-my-activities')">
+        <div class="card-meta"><span>已报名 <strong id="my-activities-count">0</strong> 个活动</span></div>
+        <div class="card-desc" style="color:var(--klein);">点击查看详情 →</div>
+      </div>
+      
+      <div class="section-title">🔔 消息通知</div>
+      <div class="card" onclick="showScreen('screen-notifications')">
+        <div class="card-meta"><span>未读消息 <strong id="unread-count">3</strong> 条</span></div>
+        <div class="card-desc" style="color:var(--klein);">点击查看 →</div>
+      </div>
+      
+      <div class="section-title">⚙️ 更多功能</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+        <div class="card" onclick="showInviteModal()" style="margin-bottom: 0; text-align: center;">
+          <div style="font-size: 32px; margin-bottom: 8px;">📨</div>
+          <div style="font-size: 14px; font-weight: 600; color: var(--text);">邀请好友</div>
+          <div style="font-size: 12px; color: var(--text-light);">+50 克莱因币</div>
+        </div>
+        <div class="card" onclick="showToast('👑 申请已提交', '我们会审核你的申请<br>审核通过后即可成为主理人', '✅')" style="margin-bottom: 0; text-align: center;">
+          <div style="font-size: 32px; margin-bottom: 8px;">👑</div>
+          <div style="font-size: 14px; font-weight: 600; color: var(--text);">成为主理人</div>
+          <div style="font-size: 12px; color: var(--text-light);">创建空间</div>
+        </div>
+        <div class="card" onclick="showToast('⚙️ 设置', '设置功能开发中...', '🔧')" style="margin-bottom: 0; text-align: center;">
+          <div style="font-size: 32px; margin-bottom: 8px;">⚙️</div>
+          <div style="font-size: 14px; font-weight: 600; color: var(--text);">设置</div>
+          <div style="font-size: 12px; color: var(--text-light);">账号与偏好</div>
+        </div>
+        <div class="card" onclick="showToast('❓ 帮助', '帮助中心开发中...', '📖')" style="margin-bottom: 0; text-align: center;">
+          <div style="font-size: 32px; margin-bottom: 8px;">❓</div>
+          <div style="font-size: 14px; font-weight: 600; color: var(--text);">帮助</div>
+          <div style="font-size: 12px; color: var(--text-light);">使用指南</div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-bar">
+      <div class="tab-item" onclick="showScreen('screen-home')"><div class="tab-icon">🏠</div><div class="tab-label">首页</div></div>
+      <div class="tab-item" onclick="showScreen('screen-apply')"><div class="tab-icon">📝</div><div class="tab-label">申请</div></div>
+      <div class="tab-item" onclick="showScreen('screen-create')"><div class="tab-icon">➕</div><div class="tab-label">发起</div></div>
+      <div class="tab-item active" onclick="showScreen('screen-profile')"><div class="tab-icon">👤</div><div class="tab-label">我的</div></div>
+    </div>
+  </div>
+
+  <!-- 我的活动页 -->
+  <div class="screen" id="screen-my-activities">
+    <div class="header-simple">
+      <div class="back-btn" onclick="showScreen('screen-profile')">← 返回</div>
+      <div class="header-title">📅 我的活动</div>
+      <div class="header-subtitle">已报名的活动</div>
+    </div>
+    <div class="content">
+      <div id="my-activities-container"></div>
+    </div>
+    <div class="tab-bar">
+      <div class="tab-item" onclick="showScreen('screen-home')"><div class="tab-icon">🏠</div><div class="tab-label">首页</div></div>
+      <div class="tab-item" onclick="showScreen('screen-apply')"><div class="tab-icon">📝</div><div class="tab-label">申请</div></div>
+      <div class="tab-item" onclick="showScreen('screen-create')"><div class="tab-icon">➕</div><div class="tab-label">发起</div></div>
+      <div class="tab-item active" onclick="showScreen('screen-profile')"><div class="tab-icon">👤</div><div class="tab-label">我的</div></div>
+    </div>
+  </div>
+
+  <!-- 通知页 -->
+  <div class="screen" id="screen-notifications">
+    <div class="header-simple">
+      <div class="back-btn" onclick="showScreen('screen-profile')">← 返回</div>
+      <div class="header-title">🔔 消息通知</div>
+      <div class="header-subtitle">活动提醒与系统通知</div>
+    </div>
+    <div class="content">
+      <div id="notifications-container"></div>
     </div>
     <div class="tab-bar">
       <div class="tab-item" onclick="showScreen('screen-home')"><div class="tab-icon">🏠</div><div class="tab-label">首页</div></div>
@@ -586,7 +842,136 @@ textarea.form-input { resize: none; height: 100px; }
   <button class="toast-close" onclick="hideToast()">好的</button>
 </div>
 
+<!-- 邀请弹窗 -->
+<div class="register-modal" id="invite-modal">
+  <div class="register-panel">
+    <div class="register-handle"></div>
+    <div class="register-title">📨 邀请好友加入</div>
+    
+    <div style="text-align: center; margin-bottom: 20px;">
+      <div style="width: 120px; height: 120px; background: linear-gradient(135deg, var(--klein) 0%, var(--klein-light) 100%); border-radius: 24px; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 48px;">🎁</div>
+      <div style="font-size: 14px; color: var(--text-light);">邀请码</div>
+      <div style="font-size: 28px; font-weight: bold; color: var(--klein); letter-spacing: 4px; margin: 8px 0;">KLEIN2025</div>
+      <div style="font-size: 13px; color: var(--text-light);">分享邀请码给好友，双方各得 <strong style="color: #FFB347;">50 克莱因币</strong></div>
+    </div>
+    
+    <div style="background: rgba(0,47,167,0.03); border-radius: 16px; padding: 16px; margin-bottom: 20px; font-size: 13px; color: var(--text-light);">
+      💡 <strong>邀请规则：</strong><br>
+      • 好友注册时填写邀请码，双方各得 50 克莱因币<br>
+      • 邀请人数无上限，多邀多得<br>
+      • 克莱因币可用于报名活动、兑换福利
+    </div>
+    
+    <button class="btn btn-primary" onclick="shareInvite()">📤 分享给好友</button>
+    <button class="btn" style="margin-top: 12px; background: #f5f5f5; color: #666;" onclick="closeInviteModal()">关闭</button>
+  </div>
+</div>
+
+<!-- 报名弹窗 -->
+<div class="register-modal" id="register-modal">
+  <div class="register-panel">
+    <div class="register-handle"></div>
+    <div class="register-title" id="register-activity-title">📚 周末读书会</div>
+    
+    <div class="register-info">
+      <div class="register-row">
+        <span class="register-label">💎 克莱因币</span>
+        <span class="register-value" id="register-points">50 克莱因币</span>
+      </div>
+      <div class="register-row">
+        <span class="register-label">👥 剩余名额</span>
+        <span class="register-value" id="register-quota">8 个名额</span>
+      </div>
+      <div class="register-row">
+        <span class="register-label">🏠 居民优惠</span>
+        <span class="register-value" id="register-discount" style="color:#27AE60">✅ 居民免门票</span>
+      </div>
+    </div>
+    
+    <div style="background: rgba(0,47,167,0.03); border-radius: 16px; padding: 16px; margin-bottom: 20px; font-size: 13px; color: var(--text-light);">
+      💡 <strong>报名须知：</strong><br>
+      • 报名成功后，活动前会微信提醒你<br>
+      • 如无法参加，请提前取消，释放名额给其他人<br>
+      • 克莱因币将在活动结束后扣除
+    </div>
+    
+    <button class="btn btn-primary" onclick="confirmRegister()">✅ 确认报名</button>
+    <button class="btn" style="margin-top: 12px; background: #f5f5f5; color: #666;" onclick="closeRegisterModal()">取消</button>
+  </div>
+</div>
+
 <script>
+// 活动数据数组
+const activities = [
+  {
+    id: 1,
+    tag: '热门',
+    points: 50,
+    quota: 8,
+    total: 15,
+    title: '📚 周末读书会',
+    subtitle: '共读《乌合之众》',
+    date: '5月4日 14:00',
+    location: '朝阳区望京',
+    space: '蓝调创意空间',
+    spaceType: 'creative',
+    desc: '这是一本关于群体心理学的经典著作。我们将一起阅读、讨论，探讨个人在群体中为什么会失去独立判断、如何在群体中保持清醒、群体智慧 vs 群体盲从。不需要提前读完，现场一起读也OK！😊',
+    residentDiscount: '免门票',
+    host: { name: '小鱼', avatar: '小', title: '主理人', desc: '艺术家 · 好评率 98%', years: 3, served: 120, points: 320, bio: '<strong>🎨 关于小鱼：</strong><br><br>央美油画系毕业，做过7年独立艺术家，作品曾在798、草场地展出。2021年创办蓝调创意空间，希望为创作者提供一个有温度的共居环境。<br><br><strong>擅长：</strong>绘画、装置艺术、策展<br><strong>理念：</strong>「艺术不是少数人的特权，而是每个人表达自我的方式」<br><strong>联系方式：</strong>微信 xiaoyu_art' }
+  },
+  {
+    id: 2,
+    tag: '线上',
+    points: 30,
+    quota: 15,
+    total: 20,
+    title: '☕ Coffee Chat',
+    subtitle: '聊聊创业路上的坑',
+    date: '5月6日 21:00',
+    location: '腾讯会议',
+    space: '极客互联空间',
+    spaceType: 'tech',
+    desc: '创业路上的坑太多，一起聊聊互相支招。话题包括：如何找到第一个付费客户、如何做冷启动、如何平衡产品和技术债、如何管理远程团队。欢迎带问题来，一起头脑风暴！',
+    residentDiscount: '五折',
+    host: { name: '达哥', avatar: '达', title: '主理人', desc: '全栈开发者 · 好评率 95%', years: 2, served: 80, points: 280, bio: '<strong>💻 关于达哥：</strong><br><br>前大厂全栈工程师，独立开发者，做过3个从0到1的产品。2022年创办极客互联空间，希望为技术人打造一个既能专注工作又能互相支持的环境。<br><br><strong>擅长：</strong>全栈开发、产品设计、创业指导<br><strong>理念：</strong>「技术改变世界，但首先改变的是我们自己」<br><strong>联系方式：</strong>微信 dage_dev' }
+  },
+  {
+    id: 3,
+    tag: '线下',
+    points: 80,
+    quota: 5,
+    total: 12,
+    title: '🎨 艺术创作工坊',
+    subtitle: '一起画画、做手工',
+    date: '5月8日 10:00',
+    location: '朝阳区',
+    space: '蓝调创意空间',
+    spaceType: 'creative',
+    desc: '一起画画、做手工，释放创造力。提供画材、手工材料，你可以自由创作，也可以跟着小鱼学习基础绘画技巧。完成的作品可以带回家！',
+    residentDiscount: '免门票',
+    host: { name: '小鱼', avatar: '小', title: '主理人', desc: '艺术家 · 好评率 98%', years: 3, served: 120, points: 320, bio: '<strong>🎨 关于小鱼：</strong><br><br>央美油画系毕业，做过7年独立艺术家，作品曾在798、草场地展出。2021年创办蓝调创意空间，希望为创作者提供一个有温度的共居环境。<br><br><strong>擅长：</strong>绘画、装置艺术、策展<br><strong>理念：</strong>「艺术不是少数人的特权，而是每个人表达自我的方式」<br><strong>联系方式：</strong>微信 xiaoyu_art' }
+  },
+  {
+    id: 4,
+    tag: '技术',
+    points: 50,
+    quota: 20,
+    total: 30,
+    title: '💻 黑客马拉松',
+    subtitle: '24小时编程挑战',
+    date: '5月10日 09:00',
+    location: '海淀区',
+    space: '极客互联空间',
+    spaceType: 'tech',
+    desc: '24小时编程挑战，丰厚奖品等你拿！可以个人参赛也可以组队，现场提供食物和饮料。评审标准：创新性、完成度、演示效果。',
+    residentDiscount: '五折',
+    host: { name: '达哥', avatar: '达', title: '主理人', desc: '全栈开发者 · 好评率 95%', years: 2, served: 80, points: 280, bio: '<strong>💻 关于达哥：</strong><br><br>前大厂全栈工程师，独立开发者，做过3个从0到1的产品。2022年创办极客互联空间，希望为技术人打造一个既能专注工作又能互相支持的环境。<br><br><strong>擅长：</strong>全栈开发、产品设计、创业指导<br><strong>理念：</strong>「技术改变世界，但首先改变的是我们自己」<br><strong>联系方式：</strong>微信 dage_dev' }
+  }
+];
+
+// 我报名的活动
+let myActivities = [];
+
 const spaces = {
   creative: {
     name: '🎨 蓝调创意空间',
@@ -693,6 +1078,485 @@ function showSpaceDetail(type) {
 
 function submitApply() {
   showToast('📝 申请已提交', '我们会尽快处理你的申请<br>并保持微信通知你结果 💬', '✅');
+}
+
+// 渲染活动列表
+function renderActivities() {
+  const container = document.getElementById('activities-container');
+  if (!container) return;
+  
+  // 应用日期筛选
+  const filteredActivities = activities.filter(a => matchesDateFilter(a, currentDateFilter));
+  
+  if (filteredActivities.length === 0) {
+    container.innerHTML = `
+      <div class="card" style="text-align:center; padding: 40px 20px;">
+        <div style="font-size: 48px; margin-bottom: 16px;">📭</div>
+        <div class="card-title">暂无符合条件的活动</div>
+        <div class="card-desc">换个筛选条件试试吧</div>
+      </div>
+    `;
+    return;
+  }
+  
+  const html = filteredActivities.map(a => `
+    <div class="card" onclick="showActivityDetail(${a.id})">
+      <span class="card-tag">${a.tag}</span>
+      <span class="card-points">💎 ${a.points}克莱因币</span>
+      <span class="quota-badge">还剩${a.quota}个名额</span>
+      <div class="card-title">${a.title}</div>
+      <div class="card-meta"><span>📅 ${a.date}</span><span>📍 ${a.location}</span><span>🏠 ${a.space}</span></div>
+      <div class="card-desc">${a.subtitle}</div>
+      <div style="margin-top: 10px;"><span class="resident-badge">🏠 居民${a.residentDiscount}</span></div>
+    </div>
+  `).join('');
+  
+  container.innerHTML = html;
+}
+
+// 显示活动详情
+function showActivityDetail(id) {
+  const a = activities.find(x => x.id === id);
+  if (!a) return;
+  
+  // 填充活动详情页
+  const detailScreen = document.getElementById('screen-detail');
+  detailScreen.querySelector('.header-title').textContent = a.title;
+  detailScreen.querySelector('.header-subtitle').textContent = a.subtitle;
+  
+  // 更新内容区域
+  const content = detailScreen.querySelector('.content');
+  content.innerHTML = `
+    <div class="card">
+      <div class="card-meta"><span>📅 ${a.date}</span></div>
+      <div class="card-meta"><span>📍 ${a.location}</span></div>
+      <div class="card-meta"><span>🏠 ${a.space}</span></div>
+      <div class="card-meta"><span>💎 需 ${a.points}克莱因币</span></div>
+      <div class="card-meta"><span>👥 限 ${a.total} 人（还剩 ${a.quota} 个名额）</span></div>
+    </div>
+    
+    <div class="section-title">🙋 主理人介绍</div>
+    <div class="host-card">
+      <div class="host-avatar">${a.host.avatar}</div>
+      <div class="host-info">
+        <div class="host-name">${a.host.name} · ${a.host.title}</div>
+        <div class="host-desc">${a.host.desc}</div>
+        <div class="host-stats">
+          <span class="host-stat">📅 运营${a.host.years}年</span>
+          <span class="host-stat">👥 服务${a.host.served}+人</span>
+          <span class="host-stat">💎 贡献值 ${a.host.points}</span>
+        </div>
+      </div>
+    </div>
+    <div class="card"><div class="card-desc">${a.host.bio}</div></div>
+    
+    <div class="section-title">📖 活动介绍</div>
+    <div class="card"><div class="card-desc">${a.desc}</div></div>
+    
+    <div class="section-title">🏠 居民优惠</div>
+    <div class="card">
+      <div class="card-desc" style="color: #27AE60; font-weight: 600;">
+        ✅ 本空间居民：<strong>${a.residentDiscount === '免门票' ? '免门票（0克莱因币）' : '五折优惠（' + Math.floor(a.points/2) + '克莱因币）'}</strong><br>
+        ✅ 其他共居居民：<strong>五折优惠（${Math.floor(a.points/2)}克莱因币）</strong>
+      </div>
+    </div>
+    
+    <div class="section-title">💎 克莱因币说明</div>
+    <div class="card"><div class="card-desc">
+      本活动需要 <strong>${a.points}克莱因币以上</strong> 才能报名。<br>
+      克莱因币代表你对社区的贡献度，可通过拉新、宣传、发起活动等方式获得。<br>
+      <span style="font-size: 11px; color: var(--text-light);">（具体克莱因币规则由管理者设定）</span>
+    </div></div>
+    
+    <div class="form-group">
+      <label class="form-label">🎫 邀请码（选填）</label>
+      <input type="text" class="form-input" placeholder="输入朋友的邀请码，TA会获得奖励">
+      <div class="form-hint">如果有朋友邀请你，填写TA的邀请码</div>
+    </div>
+    
+    <button class="btn btn-primary" onclick="openRegisterModal(${a.id})">🎉 立即报名</button>
+  `;
+  
+  showScreen('screen-detail');
+}
+
+// 打开报名弹窗
+function openRegisterModal(id) {
+  const a = activities.find(x => x.id === id);
+  if (!a) return;
+  
+  document.getElementById('register-activity-title').textContent = a.title;
+  document.getElementById('register-points').textContent = a.points + ' 克莱因币';
+  document.getElementById('register-quota').textContent = a.quota + ' 个名额';
+  document.getElementById('register-discount').innerHTML = a.residentDiscount === '免门票' 
+    ? '✅ 居民免门票（0克莱因币）' 
+    : '✅ 居民五折（' + Math.floor(a.points/2) + '克莱因币）';
+  
+  document.getElementById('register-modal').classList.add('show');
+  document.getElementById('register-modal').dataset.activityId = id;
+}
+
+// 关闭报名弹窗
+function closeRegisterModal() {
+  document.getElementById('register-modal').classList.remove('show');
+}
+
+// 确认报名
+function confirmRegister() {
+  const modal = document.getElementById('register-modal');
+  const activityId = parseInt(modal.dataset.activityId);
+  const activity = activities.find(x => x.id === activityId);
+  
+  if (activity) {
+    // 添加到我的活动
+    myActivities.push({
+      id: activity.id,
+      title: activity.title,
+      date: activity.date,
+      location: activity.location,
+      status: '已报名',
+      registeredAt: new Date().toLocaleDateString()
+    });
+    
+    // 更新名额
+    activity.quota = Math.max(0, activity.quota - 1);
+    
+    // 重新渲染活动列表
+    renderActivities();
+  }
+  
+  closeRegisterModal();
+  showToast('🎉 报名成功！', '活动前会微信提醒你<br>记得准时参加哦 📅', '✅');
+}
+
+// 日期筛选
+let currentDateFilter = 'all';
+
+// 判断活动是否符合日期筛选
+function matchesDateFilter(activity, filter) {
+  if (filter === 'all') return true;
+  
+  const dateStr = activity.date; // 如 "5月4日 14:00"
+  const match = dateStr.match(/(\d+)月(\d+)日/);
+  if (!match) return true;
+  
+  const month = parseInt(match[1]);
+  const day = parseInt(match[2]);
+  const date = new Date(2026, month - 1, day);
+  const dayOfWeek = date.getDay(); // 0=周日, 6=周六
+  
+  const now = new Date();
+  const thisWeekStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay());
+  const thisWeekEnd = new Date(thisWeekStart.getTime() + 7 * 24 * 60 * 60 * 1000);
+  const nextWeekEnd = new Date(thisWeekEnd.getTime() + 7 * 24 * 60 * 60 * 1000);
+  
+  switch (filter) {
+    case 'weekend':
+      return dayOfWeek === 0 || dayOfWeek === 6;
+    case 'weekday':
+      return dayOfWeek >= 1 && dayOfWeek <= 5;
+    case 'this-week':
+      return date >= thisWeekStart && date < thisWeekEnd;
+    case 'next-week':
+      return date >= thisWeekEnd && date < nextWeekEnd;
+    default:
+      return true;
+  }
+}
+
+function filterByDate(filter, el) {
+  currentDateFilter = filter;
+  
+  // 更新筛选标签状态
+  document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+  if (el) el.classList.add('active');
+  
+  renderActivities();
+}
+
+// 页面初始化
+renderActivities();
+
+// ========== 首页切换 ==========
+let currentHomeTab = 'activities';
+
+function switchHomeTab(tab) {
+  currentHomeTab = tab;
+  document.getElementById('tab-activities').classList.toggle('active', tab === 'activities');
+  document.getElementById('tab-buddy').classList.toggle('active', tab === 'buddy');
+  document.getElementById('home-activities').style.display = tab === 'activities' ? 'block' : 'none';
+  document.getElementById('home-buddy').style.display = tab === 'buddy' ? 'block' : 'none';
+}
+
+// ========== 找搭子 ==========
+const buddyPosts = [
+  { id:1, avatar:'👩‍🎨', name:'小鱼', time:'3分钟前', text:'明天中午有人一起吃螺蛳粉吗？发现了一家超好吃的店！🍜', tags:['约饭'], type:'aa', quota:3, likes:5, liked:false, comments:[{avatar:'🧑',name:'阿杰',text:'去！几点？'},{avatar:'👩',name:'琳琳',text:'求地址～'}] },
+  { id:2, avatar:'🧑‍💻', name:'老陈', time:'20分钟前', text:'晚上8点江边跑步，3公里慢跑，有人一起吗？', tags:['运动'], type:'free', quota:4, likes:3, liked:false, comments:[{avatar:'👨',name:'大伟',text:'我可以，配速多少？'}] },
+  { id:3, avatar:'👩‍🍳', name:'Mia', time:'1小时前', text:'周六去宜家逛逛，想买个书架，有没有顺路的可以拼车？', tags:['拼车'], type:'treat', quota:2, likes:2, liked:false, comments:[] },
+];
+
+let buddyComposeOpen = false;
+let selectedBuddyTags = [];
+let selectedBuddyType = 'free';
+
+function toggleBuddyCompose() {
+  buddyComposeOpen = !buddyComposeOpen;
+  const panel = document.getElementById('buddy-compose-panel');
+  if (panel) panel.style.display = buddyComposeOpen ? 'block' : 'none';
+}
+
+function selectBuddyType(el, type) {
+  selectedBuddyType = type;
+  document.querySelectorAll('.buddy-type-btn').forEach(btn => btn.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function toggleBuddyTag(el) {
+  const tag = el.textContent;
+  if (el.classList.contains('selected')) {
+    el.classList.remove('selected');
+    selectedBuddyTags = selectedBuddyTags.filter(t => t !== tag);
+  } else {
+    el.classList.add('selected');
+    selectedBuddyTags.push(tag);
+  }
+}
+
+function publishBuddy() {
+  const text = document.getElementById('buddy-text').value.trim();
+  const quota = parseInt(document.getElementById('buddy-quota').value) || 3;
+  if (!text) { showToast('📋', '写点什么再发吧', '⚠️'); return; }
+  buddyPosts.unshift({
+    id: Date.now(), avatar:'😊', name:'我', time:'刚刚', text,
+    tags: selectedBuddyTags.length ? [...selectedBuddyTags] : ['其他'],
+    type: selectedBuddyType, quota,
+    likes: 0, liked: false, comments: []
+  });
+  document.getElementById('buddy-text').value = '';
+  selectedBuddyTags = [];
+  document.querySelectorAll('.buddy-tag').forEach(el => el.classList.remove('selected'));
+  toggleBuddyCompose();
+  renderBuddies();
+  showToast('✅', '发布成功～', '✅');
+}
+
+function likeBuddy(id) {
+  const post = buddyPosts.find(p => p.id === id);
+  if (!post) return;
+  post.liked = !post.liked;
+  post.likes += post.liked ? 1 : -1;
+  renderBuddies();
+}
+
+function toggleComments(id) {
+  const el = document.getElementById('buddy-comments-' + id);
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+function addComment(id) {
+  const input = document.getElementById('buddy-comment-input-' + id);
+  const text = input.value.trim();
+  if (!text) return;
+  const post = buddyPosts.find(p => p.id === id);
+  post.comments.push({ avatar: '😊', name: '我', text });
+  input.value = '';
+  renderBuddies();
+}
+
+function typeLabel(t) { return { aa:'AA', treat:'请客', free:'免费' }[t] || '免费'; }
+
+function renderBuddies() {
+  const container = document.getElementById('buddy-list');
+  if (!container) return;
+  container.innerHTML = buddyPosts.map(p => `
+    <div class="buddy-card">
+      <div class="buddy-header">
+        <div class="buddy-avatar">${p.avatar}</div>
+        <div><div class="buddy-name">${p.name}</div><div class="buddy-time">${p.time}</div></div>
+      </div>
+      <div class="buddy-body">${p.text}</div>
+      <div class="buddy-meta">
+        <span class="buddy-meta-item">👥 限${p.quota}人</span>
+        <span class="buddy-meta-item">💰 ${typeLabel(p.type)}</span>
+      </div>
+      <div class="buddy-tags">${p.tags.map(t => `<span class="buddy-tag selected">${t}</span>`).join('')}</div>
+      <div class="buddy-actions">
+        <div class="buddy-action ${p.liked?'liked':''}" onclick="likeBuddy(${p.id})">${p.liked?'❤️':'🤍'} ${p.likes}</div>
+        <div class="buddy-action" onclick="toggleComments(${p.id})">💬 ${p.comments.length}条回复</div>
+      </div>
+      <div class="buddy-comments" id="buddy-comments-${p.id}" style="display:${p.comments.length?'block':'none'}">
+        ${p.comments.map(c => `
+          <div class="buddy-comment">
+            <div class="buddy-comment-avatar">${c.avatar}</div>
+            <div class="buddy-comment-body"><span class="c-name">${c.name}</span>${c.text}</div>
+          </div>
+        `).join('')}
+        <div class="buddy-comment-input">
+          <input id="buddy-comment-input-${p.id}" placeholder="写回复…" onkeydown="if(event.key==='Enter')addComment(${p.id})">
+          <button onclick="addComment(${p.id})">发送</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+renderBuddies();
+
+// 发布活动
+function publishActivity() {
+  const title = document.getElementById('create-title').value.trim();
+  const dateInput = document.getElementById('create-date').value;
+  const startTime = document.getElementById('create-start-time').value;
+  const endTime = document.getElementById('create-end-time').value;
+  const location = document.getElementById('create-location').value.trim();
+  const desc = document.getElementById('create-desc').value.trim();
+  const points = parseInt(document.getElementById('create-points').value) || 50;
+  const quota = parseInt(document.getElementById('create-quota').value) || 15;
+  const tag = document.getElementById('create-tag').value;
+  
+  if (!title || !dateInput || !startTime || !endTime || !location || !desc) {
+    showToast('📋 填写不完整', '请填写完整信息', '⚠️');
+    return;
+  }
+  
+  
+  // 转换日期格式
+  const d = new Date(dateInput);
+  const dateStr = `${d.getMonth()+1}月${d.getDate()}日`;
+  const timeStr = `${startTime}-${endTime}`;
+  const dateDisplay = `${dateStr} ${timeStr}`;
+  
+  const newActivity = {
+    id: Date.now(),
+    title,
+    date: dateDisplay,
+    location,
+    space: '待定',
+    tag,
+    points,
+    quota,
+    desc: desc,
+    detailDesc: desc,
+    residentDiscount: points > 30 ? '五折优惠' : '免门票',
+    host: {
+      name: '你',
+      title: '主理人',
+      avatar: '👤',
+      desc: '社区主理人',
+      years: 1,
+      served: 0,
+      points: 0,
+      bio: '欢迎参加我发起的活动！如有疑问欢迎联系我。'
+    }
+  };
+  
+  activities.unshift(newActivity);
+  renderActivities();
+  
+  document.getElementById('create-title').value = '';
+  document.getElementById('create-date').value = '';
+  document.getElementById('create-start-time').value = '14:00';
+  document.getElementById('create-end-time').value = '17:00';
+  document.getElementById('create-location').value = '';
+  document.getElementById('create-desc').value = '';
+  document.getElementById('create-points').value = '50';
+  document.getElementById('create-quota').value = '15';
+  
+  showToast('🚀 活动已发布！', `"${title}" 已添加<br>你获得 +20 克莱因币 🎉`, '✅');
+  setTimeout(() => showScreen('screen-home'), 1500);
+}
+
+// 渲染我的活动
+function renderMyActivities() {
+  const container = document.getElementById('my-activities-container');
+  const countEl = document.getElementById('my-activities-count');
+  
+  if (countEl) {
+    countEl.textContent = myActivities.length;
+  }
+  
+  if (!container) return;
+  
+  if (myActivities.length === 0) {
+    container.innerHTML = `
+      <div class="card" style="text-align:center; padding: 40px 20px;">
+        <div style="font-size: 48px; margin-bottom: 16px;">📭</div>
+        <div class="card-title">还没有报名活动</div>
+        <div class="card-desc">去首页看看有什么感兴趣的活动吧</div>
+        <button class="btn btn-primary" style="margin-top: 20px;" onclick="showScreen('screen-home')">去看看</button>
+      </div>
+    `;
+    return;
+  }
+  
+  const html = myActivities.map(a => `
+    <div class="card">
+      <div class="card-title">${a.title}</div>
+      <div class="card-meta"><span>📅 ${a.date}</span><span>📍 ${a.location}</span></div>
+      <div class="card-meta"><span>✅ ${a.status}</span><span>报名时间: ${a.registeredAt}</span></div>
+      <button class="btn" style="margin-top: 12px; background: #f5f5f5; color: #666;" onclick="showToast('已取消报名', '名额已释放给其他人', '✅')">取消报名</button>
+    </div>
+  `).join('');
+  
+  container.innerHTML = html;
+}
+
+// 监听页面切换，更新我的活动
+const originalShowScreen = showScreen;
+showScreen = function(screenId) {
+  originalShowScreen(screenId);
+  if (screenId === 'screen-my-activities' || screenId === 'screen-profile') {
+    renderMyActivities();
+  }
+  if (screenId === 'screen-notifications') {
+    renderNotifications();
+  }
+};
+
+// 通知数据
+const notifications = [
+  { id: 1, type: 'activity', icon: '📅', title: '活动提醒', desc: '「周末读书会」将于明天 14:00 开始，记得准时参加哦！', time: '刚刚', unread: true },
+  { id: 2, type: 'points', icon: '💎', title: '克莱因币到账', desc: '邀请好友「小明」成功，+50 克莱因币', time: '2小时前', unread: true },
+  { id: 3, type: 'system', icon: '🔔', title: '系统通知', desc: '你的申请已通过审核，欢迎加入克莱因共居社区！', time: '1天前', unread: true },
+  { id: 4, type: 'activity', icon: '📅', title: '活动提醒', desc: '「Coffee Chat」已结束，感谢参与！', time: '3天前', unread: false }
+];
+
+// 渲染通知
+function renderNotifications() {
+  const container = document.getElementById('notifications-container');
+  if (!container) return;
+  
+  const html = notifications.map(n => `
+    <div class="card" style="${n.unread ? 'border-left: 4px solid var(--klein);' : 'opacity: 0.7;'}">
+      <div style="display: flex; align-items: flex-start; gap: 12px;">
+        <div style="font-size: 32px;">${n.icon}</div>
+        <div style="flex: 1;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="card-title" style="margin-bottom: 4px; font-size: 16px;">${n.title}</div>
+            ${n.unread ? '<span style="background: var(--klein); color: white; font-size: 10px; padding: 2px 8px; border-radius: 10px;">新</span>' : ''}
+          </div>
+          <div class="card-desc" style="margin-bottom: 8px;">${n.desc}</div>
+          <div class="card-meta"><span>${n.time}</span></div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  
+  container.innerHTML = html;
+}
+
+// 邀请弹窗
+function showInviteModal() {
+  document.getElementById('invite-modal').classList.add('show');
+}
+
+function closeInviteModal() {
+  document.getElementById('invite-modal').classList.remove('show');
+}
+
+function shareInvite() {
+  closeInviteModal();
+  showToast('📤 分享成功', '邀请链接已复制到剪贴板<br>快发给好友吧！', '✅');
 }
 </script>
 </body>
